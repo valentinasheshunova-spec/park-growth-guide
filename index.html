@@ -101,10 +101,12 @@
   .nav-links a{ white-space:nowrap; padding:8px 12px; border-radius:999px; font-size:13px; font-weight:600; color:var(--clay); text-decoration:none; transition:background .2s, color .2s; }
   .nav-links a:hover, .nav-links a.active{ background:var(--yolk-pale); color:#241B0E; }
 
-  .nav-group{ position:relative; flex:0 0 auto; }
-  .nav-group-btn{ all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:5px; white-space:nowrap; padding:8px 12px; border-radius:999px; font-size:13px; font-weight:700; color:var(--clay); font-family:inherit; transition:background .2s, color .2s; }
-  .nav-group-btn:hover, .nav-group.open .nav-group-btn, .nav-group.has-active .nav-group-btn{ background:var(--yolk-pale); color:#241B0E; }
-  .nav-group-btn::after{ content:""; width:6px; height:6px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); margin-top:-3px; opacity:.6; }
+  .nav-group{ position:relative; flex:0 0 auto; display:inline-flex; align-items:center; gap:1px; }
+  .nav-group-btn{ text-decoration:none; cursor:pointer; display:inline-flex; align-items:center; white-space:nowrap; padding:8px 6px 8px 12px; border-radius:999px 0 0 999px; font-size:13px; font-weight:700; color:var(--clay); font-family:inherit; transition:background .2s, color .2s; }
+  .nav-group-btn:hover, .nav-group.has-active .nav-group-btn{ background:var(--yolk-pale); color:#241B0E; }
+  .nav-group-caret{ all:unset; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; width:26px; height:30px; border-radius:0 999px 999px 0; color:var(--clay); transition:background .2s, color .2s; }
+  .nav-group-caret:hover, .nav-group.open .nav-group-caret{ background:var(--yolk-pale); color:#241B0E; }
+  .nav-group-caret::after{ content:""; width:6px; height:6px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); opacity:.7; }
   .nav-dropdown{ position:absolute; top:calc(100% + 8px); left:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:8px; display:none; flex-direction:column; min-width:220px; z-index:40; }
   .nav-group.open .nav-dropdown{ display:flex; }
   .nav-group:last-of-type .nav-dropdown{ left:auto; right:0; }
@@ -329,7 +331,8 @@
       <div class="nav-brand"><span class="nav-mark" aria-hidden="true"></span> Еда × Рост парка</div>
       <div class="nav-links">
         <div class="nav-group">
-          <button class="nav-group-btn" type="button">Старт</button>
+          <a href="#value" class="nav-group-btn">Старт</a>
+          <button class="nav-group-caret" type="button" aria-label="Развернуть список"></button>
           <div class="nav-dropdown">
             <a href="#value">О парке</a>
             <a href="#roadmap">Стадии роста</a>
@@ -337,7 +340,8 @@
           </div>
         </div>
         <div class="nav-group">
-          <button class="nav-group-btn" type="button">Рост</button>
+          <a href="#audience" class="nav-group-btn">Рост</a>
+          <button class="nav-group-caret" type="button" aria-label="Развернуть список"></button>
           <div class="nav-dropdown">
             <a href="#audience">Кого искать</a>
             <a href="#bonuses">Бонусы курьеру</a>
@@ -346,7 +350,8 @@
           </div>
         </div>
         <div class="nav-group">
-          <button class="nav-group-btn" type="button">Удержание</button>
+          <a href="#growth" class="nav-group-btn">Удержание</a>
+          <button class="nav-group-caret" type="button" aria-label="Развернуть список"></button>
           <div class="nav-dropdown">
             <a href="#growth">Рост SH</a>
             <a href="#retain">Удержание</a>
@@ -354,7 +359,8 @@
           </div>
         </div>
         <div class="nav-group">
-          <button class="nav-group-btn" type="button">Экономика</button>
+          <a href="#economics" class="nav-group-btn">Экономика</a>
+          <button class="nav-group-caret" type="button" aria-label="Развернуть список"></button>
           <div class="nav-dropdown">
             <a href="#economics">Экономика</a>
             <a href="#faq">FAQ</a>
@@ -1092,8 +1098,9 @@
 
   var navGroups = document.querySelectorAll('.nav-group');
   navGroups.forEach(function(group){
-    var btn = group.querySelector('.nav-group-btn');
-    btn.addEventListener('click', function(e){
+    var caret = group.querySelector('.nav-group-caret');
+    if(!caret) return;
+    caret.addEventListener('click', function(e){
       e.stopPropagation();
       var willOpen = !group.classList.contains('open');
       navGroups.forEach(function(g){ g.classList.remove('open'); });
