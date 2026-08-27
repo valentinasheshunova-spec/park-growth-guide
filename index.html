@@ -328,7 +328,7 @@
           </div>
         </div>
         <div class="nav-group">
-          <button class="nav-group-btn" type="button">Расти</button>
+          <button class="nav-group-btn" type="button">Рост</button>
           <div class="nav-dropdown">
             <a href="#audience">Кого искать</a>
             <a href="#bonuses">Бонусы курьеру</a>
@@ -337,7 +337,7 @@
           </div>
         </div>
         <div class="nav-group">
-          <button class="nav-group-btn" type="button">Удерживай</button>
+          <button class="nav-group-btn" type="button">Удержание</button>
           <div class="nav-dropdown">
             <a href="#growth">Рост SH</a>
             <a href="#retain">Удержание</a>
@@ -345,7 +345,7 @@
           </div>
         </div>
         <div class="nav-group">
-          <button class="nav-group-btn" type="button">Считай</button>
+          <button class="nav-group-btn" type="button">Экономика</button>
           <div class="nav-dropdown">
             <a href="#economics">Экономика</a>
             <a href="#faq">FAQ</a>
@@ -384,17 +384,6 @@
         <div class="stat"><b data-count="140" data-suffix=" тыс.">0</b><span>партнёров сервиса</span></div>
         <div class="stat"><b data-count="29" data-suffix="%" data-prefix="+">0</b><span>рост GTV к 2025 году</span></div>
         <div class="stat"><b data-count="200" data-suffix="+">0</b><span>дней в среднем «живёт» курьер</span></div>
-      </div>
-      <div class="doc-grid reveal d1" style="grid-template-columns:1fr; margin-top:20px;">
-        <div class="doc-card primary">
-          <h4>Если у вас 2 минуты — сделайте это сегодня</h4>
-          <ol style="margin:0; padding-left:18px; color:var(--clay); font-size:14px; line-height:1.9;">
-            <li>Отвечайте на новые заявки в течение часа (блок «Привлечение»)</li>
-            <li>Отправляйте скрипт «Новичок, день 1» всем, кто вышел на первый заказ (блок «Онбординг»)</li>
-            <li>Раз в неделю звоните тем, кто не выходил 3+ дня подряд (блок «Удержание», триггеры)</li>
-          </ol>
-          <div class="doc-note">Остальное — по стадиям роста ниже, читайте по мере необходимости</div>
-        </div>
       </div>
     </div>
   </section>
@@ -1061,13 +1050,19 @@
   });
 
   var navLinks = document.querySelectorAll('.nav-links a');
-  var navSections = Array.prototype.map.call(navLinks, function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  var topSectionIds = ['value','roadmap','audience','bonuses','attract','onboard','retain','economics','faq'];
+  var navSections = topSectionIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
   if('IntersectionObserver' in window && navSections.length){
     var navIo = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(e.isIntersecting){
-          var id = '#' + e.target.id;
-          navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')===id); });
+          var id = e.target.id;
+          navLinks.forEach(function(a){
+            var target = document.getElementById(a.getAttribute('href').slice(1));
+            var container = target ? target.closest('section') : null;
+            var containerId = container ? container.id : (target ? target.id : null);
+            a.classList.toggle('active', containerId === id);
+          });
           document.querySelectorAll('.nav-group').forEach(function(g){
             g.classList.toggle('has-active', !!g.querySelector('a.active'));
           });
