@@ -104,9 +104,10 @@
   .nav-group{ position:relative; flex:0 0 auto; display:inline-flex; align-items:center; gap:1px; }
   .nav-group-btn{ text-decoration:none; cursor:pointer; display:inline-flex; align-items:center; white-space:nowrap; padding:8px 6px 8px 12px; border-radius:999px 0 0 999px; font-size:13px; font-weight:700; color:var(--clay); font-family:inherit; transition:background .2s, color .2s; }
   .nav-group-btn:hover, .nav-group.has-active .nav-group-btn{ background:var(--yolk-pale); color:#241B0E; }
-  .nav-group-caret{ all:unset; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; width:26px; height:30px; border-radius:0 999px 999px 0; color:var(--clay); transition:background .2s, color .2s; }
+  .nav-group-caret{ all:unset; box-sizing:border-box; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:0 999px 999px 0; color:var(--clay); background:var(--clay-soft); transition:background .2s, color .2s; }
   .nav-group-caret:hover, .nav-group.open .nav-group-caret{ background:var(--yolk-pale); color:#241B0E; }
-  .nav-group-caret::after{ content:""; width:6px; height:6px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); opacity:.7; }
+  .nav-group-caret::after{ content:""; width:7px; height:7px; border-right:2.5px solid currentColor; border-bottom:2.5px solid currentColor; transform:rotate(45deg); margin-top:-2px; }
+  .nav-group.open .nav-group-caret::after{ transform:rotate(225deg); margin-top:3px; }
   .nav-dropdown{ position:absolute; top:calc(100% + 8px); left:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:8px; display:none; flex-direction:column; min-width:220px; z-index:40; }
   .nav-group.open .nav-dropdown{ display:flex; }
   .nav-group:last-of-type .nav-dropdown{ left:auto; right:0; }
@@ -1101,14 +1102,17 @@
     var caret = group.querySelector('.nav-group-caret');
     if(!caret) return;
     caret.addEventListener('click', function(e){
+      e.preventDefault();
       e.stopPropagation();
       var willOpen = !group.classList.contains('open');
       navGroups.forEach(function(g){ g.classList.remove('open'); });
       if(willOpen) group.classList.add('open');
     });
   });
-  document.addEventListener('click', function(){
-    navGroups.forEach(function(g){ g.classList.remove('open'); });
+  document.addEventListener('click', function(e){
+    navGroups.forEach(function(g){
+      if(!g.contains(e.target)) g.classList.remove('open');
+    });
   });
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape'){ navGroups.forEach(function(g){ g.classList.remove('open'); }); }
