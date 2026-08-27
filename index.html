@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Гайд по росту для парков-партнёров Яндекс Еды: привлечение, онбординг, удержание курьеров и рост SH.">
+<title>Яндекс Еда × Парки — гайд по росту</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yolk:#FFDB4D;
+    --yolk-deep:#F5C400;
+    --yolk-pale:#FFF3C8;
+    --ink:#14120F;
+    --paper:#F7F5F0;
+    --paper-raised:#FFFFFF;
+    --paper-tr:rgba(247,245,240,.86);
+    --clay:#6B6155;
+    --clay-soft:#EDE9E0;
+    --petrol:#FF3D3D;
+    --petrol-soft:#FFE3E0;
+    --danger:#B0222E;
+    --danger-soft:rgba(176,34,46,.09);
+    --line:rgba(20,18,15,.14);
+    --shadow:0 24px 48px -28px rgba(20,18,15,.4);
+    --shadow-soft:0 12px 28px -18px rgba(20,18,15,.3);
+    --radius-lg:28px;
+    --radius-md:18px;
+    --radius-sm:12px;
+    --maxw:1180px;
+    --block-dark:#14120F;
+    --on-block:#F5F3EE;
+    --on-block-soft:rgba(245,243,238,.62);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ink:#F5F3EE; --paper:#0B0A08; --paper-raised:#171410; --paper-tr:rgba(11,10,8,.86);
+      --clay:#B8AF9E; --clay-soft:#242019; --petrol-soft:rgba(255,80,80,.14); --yolk-pale:#3A2E05; --line:rgba(245,243,238,.14);
+      --danger:#FF6B6B; --danger-soft:rgba(255,107,107,.14);
+      --shadow:0 24px 48px -28px rgba(0,0,0,.6); --shadow-soft:0 12px 28px -18px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#F5F3EE; --paper:#0B0A08; --paper-raised:#171410; --paper-tr:rgba(11,10,8,.86);
+    --clay:#B8AF9E; --clay-soft:#242019; --petrol-soft:rgba(255,80,80,.14); --yolk-pale:#3A2E05; --line:rgba(245,243,238,.14);
+    --danger:#FF6B6B; --danger-soft:rgba(255,107,107,.14);
+    --shadow:0 24px 48px -28px rgba(0,0,0,.6); --shadow-soft:0 12px 28px -18px rgba(0,0,0,.55);
+  }
+  :root[data-theme="light"]{
+    --ink:#14120F; --paper:#F7F5F0; --paper-raised:#FFFFFF; --paper-tr:rgba(247,245,240,.86);
+    --clay:#6B6155; --clay-soft:#EDE9E0; --petrol-soft:#FFE3E0; --yolk-pale:#FFF3C8; --line:rgba(20,18,15,.14);
+    --danger:#B0222E; --danger-soft:rgba(176,34,46,.09);
+    --shadow:0 24px 48px -28px rgba(20,18,15,.4); --shadow-soft:0 12px 28px -18px rgba(20,18,15,.3);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;}
+  .page{ background:var(--paper); color:var(--ink); font-family:'Inter',-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; overflow-x:hidden; }
+  h1,h2,h3{text-wrap:balance; margin:0; font-family:'Unbounded','Inter',sans-serif; font-weight:800; letter-spacing:-.01em;}
+  p{margin:0; line-height:1.6;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,56px);}
+  section{padding:clamp(56px,9vw,110px) 0;}
+  section + section{ border-top:1px solid var(--line); }
+
+  .tag{
+    display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700;
+    letter-spacing:.06em; text-transform:uppercase; padding:7px 16px 8px; border-radius:999px;
+    background:var(--yolk-pale); color:#241B0E; transform:rotate(-2deg); box-shadow:var(--shadow-soft);
+  }
+  .tag.petrol{ background:var(--ink); color:var(--yolk); transform:rotate(0deg); }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px;
+    font-weight:700; font-size:16px; border:1px solid transparent; cursor:pointer; text-decoration:none;
+    transition:transform .18s ease, box-shadow .18s ease; font-family:inherit;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn:focus-visible{ outline:3px solid var(--petrol); outline-offset:3px; }
+  .btn-primary{ background:var(--ink); color:var(--yolk); box-shadow:var(--shadow-soft); }
+  .btn-primary:hover{ box-shadow:var(--shadow); }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-ghost:hover{ border-color:var(--ink); }
+  .btn-sm{ padding:10px 18px; font-size:14px; }
+
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .reveal.d1{ transition-delay:.08s; } .reveal.d2{ transition-delay:.16s; } .reveal.d3{ transition-delay:.24s; }
+
+  h3.sub{ font-size:18px; margin:36px 0 4px; }
+
+  /* NAV */
+  .navbar{ position:sticky; top:0; z-index:30; backdrop-filter:blur(14px); background:var(--paper-tr); border-bottom:1px solid var(--line); }
+  .nav-inner{ max-width:var(--maxw); margin:0 auto; padding:12px clamp(20px,5vw,56px); display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .nav-brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:14.5px; white-space:nowrap; }
+  .nav-mark{ width:24px; height:24px; border-radius:50%; background:conic-gradient(from 200deg, var(--yolk), var(--yolk-deep), var(--yolk)); flex:0 0 auto; }
+  .nav-links{ display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; }
+  .nav-links::-webkit-scrollbar{ display:none; }
+  .nav-links a{ white-space:nowrap; padding:8px 12px; border-radius:999px; font-size:13px; font-weight:600; color:var(--clay); text-decoration:none; transition:background .2s, color .2s; }
+  .nav-links a:hover, .nav-links a.active{ background:var(--yolk-pale); color:#241B0E; }
+
+  .nav-group{ position:relative; flex:0 0 auto; }
+  .nav-group-btn{ all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:5px; white-space:nowrap; padding:8px 12px; border-radius:999px; font-size:13px; font-weight:700; color:var(--clay); font-family:inherit; transition:background .2s, color .2s; }
+  .nav-group-btn:hover, .nav-group.open .nav-group-btn, .nav-group.has-active .nav-group-btn{ background:var(--yolk-pale); color:#241B0E; }
+  .nav-group-btn::after{ content:""; width:6px; height:6px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg); margin-top:-3px; opacity:.6; }
+  .nav-dropdown{ position:absolute; top:calc(100% + 8px); left:0; background:var(--paper-raised); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:8px; display:none; flex-direction:column; min-width:220px; z-index:40; }
+  .nav-group.open .nav-dropdown{ display:flex; }
+  .nav-group:last-of-type .nav-dropdown{ left:auto; right:0; }
+  .nav-dropdown a{ padding:9px 12px; border-radius:9px; font-size:13.5px; font-weight:600; color:var(--ink); text-decoration:none; }
+  .nav-dropdown a:hover, .nav-dropdown a.active{ background:var(--yolk-pale); }
+  .nav-cta{ flex:0 0 auto; display:none; }
+  @media(min-width:760px){ .nav-cta{ display:inline-flex; } }
+
+  /* HERO */
+  .hero{ position:relative; padding-top:clamp(48px,8vw,88px); padding-bottom:clamp(44px,7vw,88px); }
+  .hero-blob{
+    position:absolute; top:-14%; right:-14%; width:min(60vw,700px); aspect-ratio:1/1;
+    background:var(--yolk);
+    border-radius:42% 58% 55% 45% / 45% 55% 45% 55%; animation:blobmove 16s ease-in-out infinite; z-index:0;
+  }
+  .hero-blob::after{
+    content:""; position:absolute; width:34%; aspect-ratio:1/1; background:var(--ink);
+    border-radius:50%; top:8%; left:-6%;
+  }
+  @keyframes blobmove{
+    0%,100%{ border-radius:42% 58% 55% 45% / 45% 55% 45% 55%; transform:rotate(0deg) scale(1); }
+    50%{ border-radius:55% 45% 40% 60% / 55% 45% 60% 40%; transform:rotate(6deg) scale(1.03); }
+  }
+  .hero-inner{ position:relative; z-index:1; max-width:640px; }
+  .hero h1{ font-size:clamp(34px,4.6vw,54px); line-height:1.08; margin:16px 0 18px; }
+  .hero p.lead{ font-size:clamp(16px,1.8vw,19px); color:var(--clay); max-width:56ch; margin-bottom:28px; }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px; }
+  .hero-start{ display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:700; color:var(--clay); }
+  .pin-dot{ width:10px; height:10px; border-radius:50%; background:var(--petrol); box-shadow:0 0 0 5px var(--petrol-soft); animation:pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ box-shadow:0 0 0 5px var(--petrol-soft);} 50%{ box-shadow:0 0 0 9px var(--petrol-soft);} }
+
+  /* STATS */
+  .stats{ padding-top:0; border-top:none; }
+  .stats-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; }
+  @media (max-width:820px){ .stats-grid{ grid-template-columns:repeat(2,1fr); } }
+  .stat{ background:var(--block-dark); padding:26px 20px; }
+  .stat b{ display:block; font-family:'Unbounded',sans-serif; font-size:clamp(26px,3.4vw,38px); font-weight:800; letter-spacing:-.01em; font-variant-numeric:tabular-nums; color:var(--yolk); }
+  .stat span{ font-size:13.5px; color:var(--on-block-soft); }
+
+  .head-block{ max-width:660px; margin-bottom:36px; }
+  .head-block h2{ font-size:clamp(27px,3.4vw,38px); margin-top:14px; }
+  .head-block p.lead{ margin-top:14px; color:var(--clay); font-size:15.5px; max-width:62ch; }
+
+  .chiprow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+  .chip{ font-size:13px; font-weight:700; padding:8px 14px; border-radius:999px; background:var(--clay-soft); color:var(--ink); }
+
+  .formula{ margin-top:16px; background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px 24px; }
+  .formula code{ display:block; font-family:inherit; font-weight:700; font-size:15px; line-height:1.9; color:var(--ink); }
+  .formula p{ margin-top:12px; font-size:13.5px; color:var(--clay); }
+
+  .doc-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:18px; }
+  @media(max-width:700px){ .doc-grid{grid-template-columns:1fr;} }
+  .doc-card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; position:relative; }
+  .doc-card.primary{ border-color:var(--petrol); border-width:2px; box-shadow:var(--shadow-soft); }
+  .doc-card.primary::before{ content:"Актуально сейчас"; position:absolute; top:-11px; left:20px; background:var(--petrol); color:#FFF6F5; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:4px 10px; border-radius:999px; }
+  .doc-card h4{ font-size:16px; margin:0 0 10px; }
+  .doc-card ul{ margin:0; padding-left:18px; color:var(--clay); font-size:13.5px; line-height:1.8; }
+  .doc-card ul li::marker{ color:var(--petrol); }
+  .doc-card p{ font-size:13.5px; color:var(--clay); }
+  .doc-note{ margin-top:14px; font-size:13px; color:var(--clay); border-left:3px dashed var(--line); padding-left:12px; }
+
+  .gear-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:12px; }
+  @media(max-width:980px){ .gear-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:560px){ .gear-grid{grid-template-columns:1fr;} }
+  .gear-card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px; transition:transform .2s ease, box-shadow .2s ease; }
+  .gear-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-soft); }
+  .gear-icon{ width:40px; height:40px; border-radius:11px; background:var(--yolk); display:flex; align-items:center; justify-content:center; margin-bottom:14px; font-family:'Unbounded',sans-serif; font-weight:800; font-size:11.5px; letter-spacing:.01em; color:var(--block-dark); }
+  .gear-icon.petrol{ background:var(--block-dark); color:var(--yolk); }
+  .gear-card h4{ font-size:15px; margin:0 0 8px; }
+  .gear-card p{ font-size:13.5px; color:var(--clay); }
+
+  .econ-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  @media (max-width:980px){ .econ-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:620px){ .econ-grid{ grid-template-columns:1fr; } }
+  .ticket{ position:relative; background:var(--paper-raised); border-radius:var(--radius-md); box-shadow:var(--shadow-soft); overflow:hidden; transition:transform .22s ease, box-shadow .22s ease; }
+  .ticket:hover{ transform:translateY(-6px); box-shadow:var(--shadow); }
+  .ticket-stub{ padding:18px 20px; border-bottom:2px dashed var(--line); position:relative; }
+  .ticket-stub::before,.ticket-stub::after{ content:""; position:absolute; bottom:-11px; width:22px; height:22px; border-radius:50%; background:var(--paper); border:1px solid var(--line); }
+  .ticket-stub::before{ left:-11px; } .ticket-stub::after{ right:-11px; }
+  .ticket-kicker{ font-size:12px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--petrol); }
+  .ticket-body{ padding:22px 20px 24px; }
+  .ticket-body h3{ font-size:17px; margin-bottom:10px; }
+  .ticket-body p{ font-size:13.5px; color:var(--clay); }
+  .ticket-figure{ font-size:12.5px; font-weight:700; color:var(--ink); margin-top:14px; }
+  .ticket-figure em{ font-style:normal; color:var(--clay); border-bottom:1px dashed var(--clay); font-weight:600; }
+  .ticket.dark{ background:var(--block-dark); }
+  .ticket.dark .ticket-stub{ border-color:rgba(245,243,238,.18); }
+  .ticket.dark .ticket-stub::before,.ticket.dark .ticket-stub::after{ background:var(--block-dark); border-color:rgba(245,243,238,.22); }
+  .ticket.dark .ticket-kicker{ color:var(--yolk); }
+  .ticket.dark .ticket-body p{ color:rgba(245,243,238,.72); }
+  .ticket.dark .ticket-body h3{ color:var(--on-block); }
+  .ticket.dark .ticket-figure{ color:var(--yolk); }
+
+  .rate-note{ margin-top:26px; background:var(--paper-raised); border:1px dashed var(--line); border-radius:var(--radius-md); padding:22px; display:flex; gap:20px; flex-wrap:wrap; }
+  .rate-item{ flex:1 1 220px; }
+  .rate-item b{ display:block; font-size:14px; margin-bottom:4px; font-variant-numeric:tabular-nums; color:var(--clay); border-bottom:1px dashed var(--clay); padding-bottom:2px; }
+  .rate-item span{ font-size:12.5px; color:var(--clay); }
+
+  .tab-bar{ display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 20px; }
+  .tab-btn{ padding:10px 18px; border-radius:999px; border:1px solid var(--line); background:var(--paper-raised); font-weight:700; font-size:13.5px; cursor:pointer; color:var(--clay); font-family:inherit; }
+  .tab-btn:focus-visible{ outline:3px solid var(--petrol); outline-offset:2px; }
+  .tab-btn.active{ background:var(--ink); color:var(--yolk); border-color:var(--ink); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+  .tab-group{ margin-top:30px; }
+  .tab-group > b{ font-size:14px; }
+
+  .tbl-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius-md); margin-top:16px; }
+  table.cmp{ width:100%; border-collapse:collapse; min-width:480px; }
+  table.cmp th, table.cmp td{ text-align:left; padding:13px 16px; font-size:13.5px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.cmp th{ background:var(--block-dark); font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--yolk); font-weight:700; }
+  table.cmp tr:last-child td{ border-bottom:none; }
+  table.cmp td.good{ background:var(--yolk-pale); font-weight:700; color:var(--ink); }
+
+  .plist{ list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .plist li{ font-size:14px; color:var(--clay); padding-left:20px; position:relative; }
+  .plist li::before{ content:""; position:absolute; left:0; top:8px; width:7px; height:7px; border-radius:50%; background:var(--petrol); }
+  .plist b{ color:var(--ink); }
+
+  .route{ position:relative; margin-top:40px; padding-left:64px; }
+  .route-spine{ position:absolute; left:22px; top:6px; bottom:6px; width:2px; background-image:repeating-linear-gradient(to bottom, var(--line) 0 8px, transparent 8px 16px); }
+  .route-dot{ position:absolute; left:14px; top:0; width:18px; height:18px; border-radius:50%; background:var(--yolk); border:3px solid var(--paper); box-shadow:0 0 0 3px var(--petrol); transition:top .12s linear; z-index:2; }
+  .stop{ position:relative; padding-bottom:36px; }
+  .stop:last-child{ padding-bottom:0; }
+  .stop-num{ position:absolute; left:-64px; top:-2px; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; background:var(--paper-raised); border:2px solid var(--line); color:var(--clay); transition:background .25s ease, border-color .25s ease, color .25s ease, transform .25s ease; }
+  .stop.active .stop-num{ background:var(--yolk); border-color:var(--yolk-deep); color:#241B0E; transform:scale(1.08); }
+  .stop h3{ font-size:17px; margin-bottom:5px; }
+  .stop p{ color:var(--clay); font-size:14px; max-width:56ch; }
+
+  .quote{ margin-top:32px; padding:28px 30px; border-radius:var(--radius-md); background:var(--block-dark); }
+  .quote p{ font-family:'Unbounded',sans-serif; font-size:16.5px; font-weight:700; color:var(--yolk); max-width:64ch; letter-spacing:-.005em; }
+  .quote span{ display:block; margin-top:12px; font-size:12.5px; font-weight:700; color:var(--on-block-soft); text-transform:uppercase; letter-spacing:.04em; }
+
+  .flagbox{ margin-top:20px; padding:18px 22px; border-radius:var(--radius-md); background:var(--yolk-pale); border:1px solid rgba(20,18,15,.1); }
+  .flagbox p{ font-size:14.5px; color:var(--ink); max-width:66ch; }
+  .flagbox b{ color:#8A6A00; }
+  .flagbox.warn{ background:var(--danger-soft); border-color:rgba(176,34,46,.22); }
+  .flagbox.warn b{ color:var(--danger); }
+
+  .role-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px; }
+  @media(max-width:820px){ .role-grid{grid-template-columns:1fr;} }
+  .role-card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px; }
+  .role-card h4{ font-size:15px; margin:0 0 8px; }
+  .role-card p{ font-size:13.5px; color:var(--clay); }
+
+  .support-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:12px; }
+  @media(max-width:820px){ .support-grid{grid-template-columns:1fr;} }
+  .support-card{ background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px; }
+  .support-card h4{ font-size:15px; margin:0 0 8px; }
+  .support-card p{ font-size:13.5px; color:var(--clay); margin-bottom:10px;}
+
+  .script-card{ background:var(--paper-raised); border:1px solid var(--line); border-left:4px solid var(--ink); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:16px 20px; margin-top:12px; }
+  .script-card b{ display:block; font-size:11.5px; color:var(--ink); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
+  .script-card p{ font-size:14.5px; font-style:italic; }
+  [data-panel="e"] .script-card{ border-left-color:var(--yolk-deep); }
+  [data-panel="e"] .script-card b{ color:#8A6A00; }
+  [data-panel="d"] .script-card{ border-left-color:var(--ink); }
+  [data-panel="g"] .script-card{ border-left-color:var(--petrol); }
+  [data-panel="g"] .script-card b{ color:var(--petrol); }
+
+  .mockrow{ display:flex; flex-wrap:wrap; gap:20px; margin-top:20px; }
+  .mock{ width:270px; border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow-soft); background:var(--paper-raised); flex:none; }
+  .mock-photo{ height:140px; background:repeating-linear-gradient(135deg, var(--yolk) 0 14px, var(--yolk-deep) 14px 28px); display:flex; align-items:center; justify-content:center; text-align:center; padding:12px; }
+  .mock-photo span{ font-size:11px; color:var(--block-dark); line-height:1.5; font-weight:800; text-transform:uppercase; letter-spacing:.03em; background:var(--paper-raised); padding:6px 10px; border-radius:8px; }
+  .mock-body{ padding:16px 18px; }
+  .mock-title{ font-weight:800; font-size:15px; margin:0 0 6px; }
+  .mock-price{ font-weight:800; font-size:17px; color:var(--petrol); margin:0 0 8px; }
+  .mock-text{ font-size:13px; color:var(--clay); margin:0 0 10px; line-height:1.5; }
+  .mock-foot{ display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--clay); border-top:1px solid var(--line); padding-top:10px; }
+  .mock-platform{ text-transform:uppercase; letter-spacing:.05em; font-weight:700; }
+
+  .faq-list{ display:flex; flex-direction:column; gap:12px; margin-top:8px; }
+  .faq-item{ border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--paper-raised); overflow:hidden; }
+  .faq-q{ width:100%; text-align:left; background:none; border:0; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:19px 22px; font-size:15.5px; font-weight:700; color:var(--ink); font-family:inherit; }
+  .faq-q:focus-visible{ outline:3px solid var(--petrol); outline-offset:-3px; }
+  .faq-plus{ flex:0 0 auto; width:22px; height:22px; position:relative; }
+  .faq-plus::before,.faq-plus::after{ content:""; position:absolute; background:var(--petrol); border-radius:2px; transition:transform .3s ease; }
+  .faq-plus::before{ left:0; top:10px; width:22px; height:2px; }
+  .faq-plus::after{ left:10px; top:0; width:2px; height:22px; }
+  .faq-item.open .faq-plus::after{ transform:rotate(90deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .faq-a p{ padding:0 22px 22px; color:var(--clay); font-size:14.5px; max-width:62ch; }
+
+  .footer{ background:var(--block-dark); color:var(--on-block); border-radius:var(--radius-lg); margin:0 clamp(20px,5vw,56px) clamp(48px,8vw,96px); padding:clamp(38px,6vw,60px); position:relative; overflow:hidden; }
+  .footer::before{ content:""; position:absolute; width:320px; height:320px; border-radius:50%; background:var(--yolk); opacity:.16; right:-90px; bottom:-120px; }
+  .footer h2{ font-size:clamp(25px,3.4vw,36px); color:var(--on-block); max-width:20ch; position:relative; }
+  .footer-note{ color:var(--on-block-soft); margin-top:14px; max-width:56ch; position:relative; }
+  .footer-ways{ display:flex; gap:26px; flex-wrap:wrap; margin-top:32px; position:relative; }
+  .way{ display:flex; gap:12px; align-items:flex-start; max-width:230px; }
+  .way b{ display:block; color:var(--yolk); font-size:13.5px; margin-bottom:4px; }
+  .way span{ color:var(--on-block-soft); font-size:13px; }
+
+  .draft-flag{ position:fixed; left:18px; bottom:18px; z-index:20; font-size:12px; font-weight:700; letter-spacing:.03em; background:var(--yolk); color:var(--block-dark); padding:9px 14px 10px; border-radius:10px; box-shadow:var(--shadow-soft); transform:rotate(-3deg); border:1px solid rgba(20,18,15,.15); max-width:210px; }
+
+  .stage-filter{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:22px; }
+  .stage-filter-label{ font-size:12.5px; font-weight:700; color:var(--clay); text-transform:uppercase; letter-spacing:.04em; margin-right:4px; }
+  [data-stage-min]{ max-height:2400px; overflow:hidden; transition:opacity .3s ease, max-height .45s ease, margin .45s ease; }
+  .stage-dim{ opacity:0; max-height:0 !important; margin-top:0 !important; margin-bottom:0 !important; pointer-events:none; }
+  .stage-here{ box-shadow:0 0 0 3px var(--petrol), var(--shadow-soft); }
+  .stage-here::after{ content:"Вы здесь"; position:absolute; top:-11px; right:16px; background:var(--petrol); color:#FFF6F5; font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:4px 9px; border-radius:999px; z-index:2; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand"><span class="nav-mark" aria-hidden="true"></span> Еда × Рост парка</div>
+      <div class="nav-links">
+        <div class="nav-group">
+          <button class="nav-group-btn" type="button">Старт</button>
+          <div class="nav-dropdown">
+            <a href="#value">О парке</a>
+            <a href="#roadmap">Стадии роста</a>
+            <a href="#tools">Инструменты</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-group-btn" type="button">Расти</button>
+          <div class="nav-dropdown">
+            <a href="#audience">Кого искать</a>
+            <a href="#bonuses">Бонусы курьеру</a>
+            <a href="#attract">Привлечение</a>
+            <a href="#onboard">Онбординг</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-group-btn" type="button">Удерживай</button>
+          <div class="nav-dropdown">
+            <a href="#growth">Рост SH</a>
+            <a href="#retain">Удержание</a>
+            <a href="#rhythm">Ритм</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-group-btn" type="button">Считай</button>
+          <div class="nav-dropdown">
+            <a href="#economics">Экономика</a>
+            <a href="#faq">FAQ</a>
+          </div>
+        </div>
+      </div>
+      <a class="btn btn-primary btn-sm nav-cta" href="#bonuses">Питч для курьера</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-blob" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="tag reveal">Гайд по росту для парков Яндекс Еды</span>
+        <h1 class="reveal d1">Больше курьеров. Дольше на линии. Меньше оттока.</h1>
+        <p class="lead reveal d2">Три рычага — и весь этот гайд построен вокруг них: от первой заявки до системы, которая держит курьера на линии месяцами, а не недели. Вы уже подключены. Дальше — вопрос системы, а не везения.</p>
+        <div class="hero-ctas reveal d3">
+          <a class="btn btn-primary" href="#bonuses">Питч для курьера →</a>
+          <a class="btn btn-ghost" href="#attract">Как привлекать →</a>
+        </div>
+        <div class="chiprow reveal d3" style="margin-top:-8px; margin-bottom:20px;">
+          <span style="font-size:12px; color:var(--clay); align-self:center;">Быстрый доступ:</span>
+          <a href="#retain" class="chip" style="text-decoration:none;">Скрипты и триггеры</a>
+          <a href="#rhythm" class="chip" style="text-decoration:none;">Метрики недели</a>
+          <a href="#economics" class="chip" style="text-decoration:none;">Экономика</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="wrap">
+      <div class="stats-grid reveal">
+        <div class="stat"><b data-count="400" data-suffix="+">0</b><span>городов присутствия</span></div>
+        <div class="stat"><b data-count="140" data-suffix=" тыс.">0</b><span>партнёров сервиса</span></div>
+        <div class="stat"><b data-count="29" data-suffix="%" data-prefix="+">0</b><span>рост GTV к 2025 году</span></div>
+        <div class="stat"><b data-count="200" data-suffix="+">0</b><span>дней в среднем «живёт» курьер</span></div>
+      </div>
+      <div class="doc-grid reveal d1" style="grid-template-columns:1fr; margin-top:20px;">
+        <div class="doc-card primary">
+          <h4>Если у вас 2 минуты — сделайте это сегодня</h4>
+          <ol style="margin:0; padding-left:18px; color:var(--clay); font-size:14px; line-height:1.9;">
+            <li>Отвечайте на новые заявки в течение часа (блок «Привлечение»)</li>
+            <li>Отправляйте скрипт «Новичок, день 1» всем, кто вышел на первый заказ (блок «Онбординг»)</li>
+            <li>Раз в неделю звоните тем, кто не выходил 3+ дня подряд (блок «Удержание», триггеры)</li>
+          </ol>
+          <div class="doc-note">Остальное — по стадиям роста ниже, читайте по мере необходимости</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="value">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag petrol">Прежде чем начать</span>
+        <h2>Парк Яндекс Еды — не посредник, а система роста</h2>
+        <p class="lead">Поздравляем с началом сотрудничества — вы вошли в программу с масштабом выше. Но масштаб сервиса не делает работу за вас: то, что держит курьера именно у вас, а не в соседнем парке или напрямую у сервиса, — это шесть ролей ниже. Ни одну из них не сыграет алгоритм.</p>
+      </div>
+      <div class="doc-grid reveal d1" style="grid-template-columns:1fr; max-width:560px;">
+        <div class="doc-card"><h4>Зачем парк Яндекс Еды сервису</h4><p style="margin-bottom:0;">Берёт на себя привлечение, оформление СМЗ, обучение и ежедневную поддержку курьеров — вместо того чтобы сервис делал это напрямую с каждым человеком. Это то, что позволяет доставке расти в городе быстрее одного колл-центра.</p></div>
+      </div>
+      <h3 class="sub reveal d2">Зачем парк курьеру — шесть ролей, которые не сыграет алгоритм</h3>
+      <div class="role-grid reveal d2">
+        <div class="role-card"><h4>Привычный работодатель</h4><p>Знакомая компания рядом, а не абстрактный сервис — понятно, к кому идти с вопросом.</p></div>
+        <div class="role-card"><h4>Человеческие отношения</h4><p>Личный контакт вместо алгоритма: разбираются в ситуации, а не отвечают шаблонной фразой.</p></div>
+        <div class="role-card"><h4>«Своя компания»</h4><p>Ощущение принадлежности, а не разовый заработок через очередное приложение.</p></div>
+        <div class="role-card"><h4>Платёжный партнёр</h4><p>Моментальные ежедневные выплаты, а при необходимости — вывод денег на карты третьих лиц.</p></div>
+        <div class="role-card"><h4>Быстрый старт</h4><p>Оформление даже без опыта — вы помогаете с самозанятостью и документами.</p></div>
+        <div class="role-card"><h4>Помощь с экипировкой</h4><p>Вы избавляете курьера от беготни за термосумкой и инвентарём.</p></div>
+      </div>
+      <p class="reveal d3" style="margin-top:20px; font-size:14px; color:var(--clay); max-width:68ch;">Курьер не «уходит из парка ради Еды» — он просто добавляет доход, не теряя привычную работу и человека, к которому можно обратиться. Чем сильнее вы в этих шести ролях, тем выше SH, ниже отток и больше зарабатывают все трое: курьер, вы, сервис.</p>
+
+      <div class="formula reveal d3">
+        <code>SH парка = число активных курьеров × среднее SH на одного курьера</code>
+        <p><b style="color:var(--ink);">SH</b> (service hours) — суммарные часы курьеров на линии, главный показатель сервиса. <b style="color:var(--ink);">Активный курьер</b> — тот, кто выходил на линию хотя бы раз за последние 7 дней; это определение используется во всём гайде ниже. Привлечение растит первый множитель, удержание не даёт ему падать, рост SH на курьера растит второй. Больше курьеров без роста среднего SH на каждого — рост числом, не тот рост, который считает сервис.</p>
+      </div>
+
+      <div id="tools">
+        <h3 class="sub reveal d3">Инструменты и линии поддержки — справочно</h3>
+        <div class="doc-grid reveal d3">
+          <div class="doc-card"><h4>Яндекс Про — для курьера</h4><p style="margin-bottom:0;">Заказы и слоты, вывод денег, обучение, «Прогресс», приоритет через парк. Линия поддержки курьера — прямо в приложении, до 90% вопросов закрывает без эскалации на вас.</p></div>
+          <div class="doc-card"><h4>Диспетчерская и кабинет — для парка</h4><p style="margin-bottom:0;">Аналитика, подключение, отчётность и выплаты. Отдельная линия поддержки + персональный менеджер — только для вас.</p></div>
+        </div>
+        <p class="reveal d3" style="margin-top:16px; font-size:13.5px; color:var(--clay);">Третья линия — ваша собственная поддержка курьеров: чаты, наставничество, обратная связь напрямую. Как её выстроить — в блоке «Удержание» ниже.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag petrol">Прежде чем открывать все вкладки</span>
+        <h2>Стадии роста — что делать сейчас, а что пока игнорировать</h2>
+        <p class="lead">Весь гайд ниже — не чек-лист «сделай всё сразу». Это разные инструменты для разных стадий. Выберите свою — блоки, которые пока рано читать, погаснут сами.</p>
+      </div>
+      <div class="econ-grid reveal d1">
+        <div class="ticket" data-stage-min="0">
+          <div class="ticket-stub"><span class="ticket-kicker">0–20 курьеров · старт</span></div>
+          <div class="ticket-body"><h3>Один человек тянет всё</h3><p>Один канал (ВК + офлайн-рефералка), ручной прозвон по скриптам из блока «Онбординг». Геймификация и события — рано, курьеров ещё мало для конкуренции между ними. Цель месяца — не потерять никого из первых 20 в первую неделю.</p></div>
+        </div>
+        <div class="ticket dark" data-stage-min="1">
+          <div class="ticket-stub"><span class="ticket-kicker">20–50 · разгон</span></div>
+          <div class="ticket-body"><h3>Первый наём и первые команды</h3><p>Добавляете Директ. Прозвон по триггерам уже не тянуть одному вечерами — время нанять диспетчера хотя бы на полставки. Запускаете первые командные цели (блок «Рост SH»).</p></div>
+        </div>
+        <div class="ticket" data-stage-min="2">
+          <div class="ticket-stub"><span class="ticket-kicker">50–150 · масштаб</span></div>
+          <div class="ticket-body"><h3>Полная система удержания</h3><p>Авито оправдан по деньгам. Геймификация, сообщество и регулярные события из блока «Удержание» начинают реально работать — курьеров достаточно, чтобы статус и конкуренция что-то значили. Штат — 2–3 человека.</p></div>
+        </div>
+        <div class="ticket dark" data-stage-min="3">
+          <div class="ticket-stub"><span class="ticket-kicker">150+ · топ парк Яндекс Еды</span></div>
+          <div class="ticket-body"><h3>Второй район или город</h3><p>Отдельный человек на рекрутинг постоянно. Разговор с сервисом о персональных тарифах становится реалистичным. Рост дальше — за счёт географии: у каждой зоны свой лидерборд и своя SH-цель, спрос между районами не одинаков, и общий рейтинг на весь парк перестаёт быть честным.</p></div>
+        </div>
+      </div>
+
+      <div class="stage-filter reveal d2" id="stageFilter">
+        <span class="stage-filter-label">Ваша стадия:</span>
+        <button class="tab-btn active" data-stage="all">Показать всё</button>
+        <button class="tab-btn" data-stage="0">0–20</button>
+        <button class="tab-btn" data-stage="1">20–50</button>
+        <button class="tab-btn" data-stage="2">50–150</button>
+        <button class="tab-btn" data-stage="3">150+</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="audience">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag">Прежде чем привлекать</span>
+        <h2>Кого вы ищете</h2>
+        <p class="lead">Разный тип курьера — разный канал, разная экипировка, разный крючок в разговоре.</p>
+      </div>
+      <div class="gear-grid reveal d1">
+        <div class="gear-card"><div class="gear-icon">ПШ</div><h4>Пеший</h4><p>Минимальный порог входа, студенты и локальные жители, малый радиус, самый быстрый онбординг.</p></div>
+        <div class="gear-card"><div class="gear-icon">ВЛ</div><h4>Вело</h4><p>Активная молодёжь, средний радиус, сезонность влияет сильнее всего — но это и точка роста для пешего.</p></div>
+        <div class="gear-card"><div class="gear-icon">МТ</div><h4>Мото</h4><p>Опытные курьеры, права категории А, высокий доход, работают в любую погоду при экипировке.</p></div>
+        <div class="gear-card"><div class="gear-icon">АВ</div><h4>Авто</h4><p>Часто — бывшие таксисты, не прошедшие классификатор; самый высокий чек, полный день.</p></div>
+      </div>
+
+      <div class="quote reveal d2">
+        <p>Пеший курьер не застревает на пешем. По программе «Яндекс Байк» можно пересесть на электровелосипед — при активности от 70 заказов в неделю аренда стоит 1 ₽ вместо полной цены.</p>
+        <span>Конкретная цель для новичка с первого дня — доступность по городам уточняется в приложении Яндекс Про</span>
+      </div>
+
+      <h3 class="sub reveal d2">Кто реально идёт в курьеры</h3>
+      <ul class="plist reveal d2">
+        <li><b>40%</b> ищут подработку, <b>74%</b> выбирают из-за гибкого графика, <b>21%</b> воспринимают это как старт карьеры — таких можно растить в наставники</li>
+        <li>Доход курьера уже на <b>27% выше</b>, чем у специалистов без высшего образования, и выше средней зарплаты учителя и врача</li>
+        <li>Растущий и недооценённый сегмент — <b>пенсионеры</b>: интерес к подработке 55+ вырос на 18% за год</li>
+        <li>Спрос на позицию «пеший курьер» в целом вырос на <b>104%</b> год к году — рынок разгоняется, не остывает</li>
+      </ul>
+
+      <div class="doc-grid reveal d3" style="grid-template-columns:1fr; max-width:520px;">
+        <div class="doc-card primary">
+          <h4>Официальные требования</h4>
+          <p style="margin-bottom:0;">Гражданин РФ, от 18 лет. Нужны паспорт, регистрация, СНИЛС при наличии, ИНН, статус самозанятого — обязательно.</p>
+          <div class="doc-note">Найм граждан ЕАЭС и других гражданств сервис пока не ведёт. Мигрантский сегмент — не источник роста: с 2025 года в ряде регионов вводят прямые ограничения на работу курьером по патенту.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bonuses">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag petrol">Аргумент на собеседовании</span>
+        <h2>Почему выгодно быть курьером Яндекс Еды</h2>
+        <p class="lead">Не абстрактное «выгодно», а список, который можно проговорить за минуту.</p>
+      </div>
+      <div class="gear-grid reveal d1">
+        <div class="gear-card"><div class="gear-icon petrol">СТ</div><h4>Страховка на слоте</h4><p>Бесплатно, автоматически, без заявления. Покрывает травмы и ДТП, не зависит от гражданства.</p></div>
+        <div class="gear-card"><div class="gear-icon petrol">БН</div><h4>Бонус новичку</h4><p>До 10 000 ₽ за 30 заказов в первые 20–30 дней; до 25 000 ₽ за 160 заказов.</p></div>
+        <div class="gear-card"><div class="gear-icon petrol">ЭК</div><h4>Экипировка растёт с тобой</h4><p>Термокороб сразу — свой подойдёт при фотоконтроле. Плащ и куртка — бонус после ~300 доставок.</p></div>
+        <div class="gear-card"><div class="gear-icon petrol">ЯБ</div><h4>«Яндекс Байк» за 1 ₽</h4><p>При активности от 70 заказов в неделю аренда электровелосипеда почти бесплатно.</p></div>
+        <div class="gear-card"><div class="gear-icon petrol">КФ</div><h4>Коэффициенты ×1,5–2</h4><p>В непогоду, праздники и час пик доход ощутимо выше обычного.</p></div>
+        <div class="gear-card"><div class="gear-icon petrol">ВП</div><h4>«Выгодно с Про»</h4><p>Маркетплейс партнёрских скидок прямо в приложении: страховка, ТО, связь, здоровье.</p></div>
+        <div class="gear-card"><div class="gear-icon petrol">ПР</div><h4>Приоритет заказов</h4><p>У курьеров, подключённых через парк, — +10 баллов к распределению заказов.</p></div>
+        <div class="gear-card"><div class="gear-icon petrol">ДР</div><h4>«Пригласите друга»</h4><p>До 5 000 ₽ за друга, который начал работать.</p></div>
+      </div>
+      <div class="quote reveal d2">
+        <p>«У нас страховка на каждом слоте — бесплатно, без бумаг. Экипировку выдаём сразу, за 300 доставок — ещё и куртка. Первые 30 заказов за месяц — до 10 000 ₽ бонусом, дальше можно дойти до 25 000 ₽. Возьмёшь актив от 70 заказов в неделю — пересядешь на электровелосипед почти бесплатно. А в непогоду и праздники платят в 1,5–2 раза больше обычного».</p>
+        <span>Готовый питч на 30 секунд — проговорить дословно</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="attract">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag">Воронка</span>
+        <h2>Привлечение курьеров</h2>
+        <p class="lead">Канал приводит заявку — до линии реально доходит меньше половины. Разрыв закрывается скоростью обработки и порядком подключения каналов.</p>
+      </div>
+
+      <div data-tabgroup="attract" class="reveal d1">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="channels">Каналы</button>
+          <button class="tab-btn" data-tab="segments">Паблики и блогеры по сегментам</button>
+          <button class="tab-btn" data-tab="platforms">Площадки и аудитория</button>
+          <button class="tab-btn" data-tab="ads">Шаблоны объявлений</button>
+          <button class="tab-btn" data-tab="mocks">Макеты</button>
+        </div>
+
+        <div class="tab-panel active" data-panel="channels">
+          <div class="tbl-wrap">
+            <table class="cmp">
+              <tr><th>Канал</th><th>Тип</th><th>Когда подключать</th></tr>
+              <tr><td>ВКонтакте — посты в городских чатах + таргет</td><td>Бесплатно / платно</td><td>С первого дня — обычно лучшая конверсия</td></tr>
+              <tr><td>Офлайн-реферальные («приведи друга»)</td><td>Бесплатно</td><td>Всегда — самый дешёвый канал в пересчёте на найм</td></tr>
+              <tr><td>Telegram-каналы вакансий (городские)</td><td>Бесплатно / платно</td><td>Параллельно с ВК</td></tr>
+              <tr><td>Яндекс Директ</td><td>Платно</td><td>От ~20 заявок/день</td></tr>
+              <tr><td>hh.ru, SuperJob, Rabota.ru</td><td>Размещение бесплатно, продвижение платно</td><td>Массовый набор</td></tr>
+              <tr><td>Авито</td><td>Платно</td><td>От 100+ заявок/день. Отклик здесь в последнее время заметно ниже, даже при широкой географии — не стройте план только на этом канале</td></tr>
+              <tr><td>OK.ru — группы вакансий</td><td>Бесплатно</td><td>Аудитория 35+, пенсионеры</td></tr>
+              <tr><td>YouTube — шортсы «сколько зарабатывает курьер»</td><td>Бесплатно (UGC)</td><td>Соцдоказательство, не прямой набор</td></tr>
+              <tr><td>Наружка у метро / ПВЗ / подъездов</td><td>Платно, дёшево</td><td>Локальный охват</td></tr>
+              <tr><td>«Работа России» (trudvsem.ru)</td><td>Бесплатно, обязательно по закону</td><td>Разместить один раз — почти никто из парков этим не пользуется, хотя обязан</td></tr>
+            </table>
+          </div>
+          <div class="rate-note">
+            <div class="rate-item"><b>1 час</b><span>Заявка → первый контакт. Скорость реакции, а не канал — самая частая причина потери заявки</span></div>
+            <div class="rate-item"><b>34–40%</b><span>Целевая конверсия заявка → выход на линию. Ниже 30% — смотреть, на каком шаге теряют</span></div>
+            <div class="rate-item"><b>2 500–3 000 ₽</b><span>Целевая стоимость привлечённого курьера. Выше — меньше Авито/Директа, больше рефералки и «Работы России»</span></div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="segments">
+          <p style="font-size:14px; color:var(--clay); max-width:72ch; margin-bottom:6px;">Конкретные паблики и блогеры в каждом городе свои и меняются от сезона к сезону — ниже рабочая методика поиска под каждый сегмент. Проходите по этим запросам раз в квартал: новые площадки и микроблогеры появляются постоянно, а старые теряют охват.</p>
+          <div class="doc-grid reveal">
+            <div class="doc-card">
+              <h4>Студенты — пеший / вело</h4>
+              <p style="margin-bottom:10px;">Пабли́ки конкретных вузов и общежитий в VK («Подслушано [вуз]», группы студсоветов), паблики «Подработка/Халява [город]».</p>
+              <ul style="margin:0 0 10px;"><li>Поиск в VK: «подработка студентам [город]», «[вуз] вакансии»</li><li>Точки: доски у деканатов, партнёрство со студсоветом за % от бонуса за друга</li></ul>
+              <p style="margin:0; font-size:12.5px; color:var(--clay);">Блогеры: локальные тиктокеры/шортс-блогеры про студенческую жизнь города, 5–20 тыс. подписчиков — ищите по хэштегам «студенческая подработка», «работа в общаге»</p>
+            </div>
+            <div class="doc-card">
+              <h4>Пенсионеры — растущий сегмент</h4>
+              <p style="margin-bottom:10px;">OK.ru — основная площадка этой аудитории, а не VK. Локальные группы «Пенсионеры [город]», паблики центров соцзащиты.</p>
+              <ul style="margin:0 0 10px;"><li>Поиск в OK.ru: «работа [город] 55+», «подработка пенсионерам»</li><li>Точки: доски объявлений у поликлиник, МФЦ, местные районные газеты — да, офлайн ещё работает именно для этой аудитории</li></ul>
+            </div>
+            <div class="doc-card">
+              <h4>Экс-таксисты — авто / мото</h4>
+              <p style="margin-bottom:10px;">Чаты и паблики таксистов города (ищутся в Telegram по «таксисты [город] чат»), форумы и группы таксопарков.</p>
+              <ul style="margin:0 0 10px;"><li>Прямой контакт: договориться с таксопарками — предлагать себя как вариант для тех, кто не прошёл классификатор</li></ul>
+              <p style="margin:0; font-size:12.5px; color:var(--clay);">Блогеры: авто/такси-блогеры на YouTube с контентом «сколько я заработал в такси vs доставке» — ищите по «заработок такси [город] 2026»</p>
+            </div>
+            <div class="doc-card">
+              <h4>Фрилансеры и подработчики</h4>
+              <p style="margin-bottom:10px;">Паблики «Подработка [город]», «Работа для всех», Telegram-каналы HR-агентств по региону.</p>
+              <ul style="margin:0 0 10px;"><li>Платформы: Авито Подработка (отдельный раздел), YouDo для разовых заданий</li></ul>
+            </div>
+            <div class="doc-card">
+              <h4>Опытные мото / вело</h4>
+              <p style="margin-bottom:10px;">Байкерские и велосипедные сообщества города, паблики «Курьеры [город]» — там уже сидит нужная аудитория, ищет более выгодный парк.</p>
+              <ul style="margin:0;"><li>Блогеры: курьерские шортс-блогеры «день из жизни курьера», «заработок за смену» — ищите по этим фразам в поиске VK Клипы и YouTube Shorts по своему городу</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="platforms">
+          <div class="tbl-wrap">
+            <table class="cmp">
+              <tr><th>Площадка</th><th>Аудитория</th><th>Особенность</th></tr>
+              <tr><td>Юла</td><td>Мобильная молодая аудитория</td><td>Бесплатных услуг нет, оплата за продвижение</td></tr>
+              <tr><td>Работа.ру</td><td>Массовый сегмент, малые города</td><td>Бесплатно при подписке СберБизнес</td></tr>
+              <tr><td>Фарпост, Зарплата.ру, Хабр Карьера, Авирона</td><td>Региональные и нишевые</td><td>Разные условия бесплатного доступа к базе резюме</td></tr>
+            </table>
+          </div>
+          <p style="margin-top:16px; font-size:13px; color:var(--clay);">Курьер конкурирует за ту же аудиторию, что и: <span style="font-weight:700; color:var(--ink);">средняя зарплата пешего курьера уже выше учителя и врача</span> — сильный довод в объявлении.</p>
+          <div class="chiprow">
+            <span class="chip">Официанты</span>
+            <span class="chip">Кассиры</span>
+            <span class="chip">Упаковщики</span>
+            <span class="chip">Разнорабочие</span>
+            <span class="chip">Начинающие специалисты без опыта</span>
+            <span class="chip">Фрилансеры в поиске доп. дохода</span>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="ads">
+          <div class="formula"><code>Заголовок (hh.ru, Авито)</code><p>«Курьер без опыта: до 3 500 ₽ за смену. Можно пешком, старт сразу»</p></div>
+          <div class="formula"><code>Пост в VK-чат</code><p>«Ищем курьеров в свой район — гибкий график, выплаты каждый день, без опыта. Пишите в личку» — до 150 символов, без точной суммы (иначе банят как спам), под контекст конкретного чата</p></div>
+          <div class="formula"><code>Баннер / листовка</code><p>«От 2000 ₽ за смену» · «Выплаты каждый день на карту» · «Сам выбираешь смены» · CTA: «Зарегистрируйся за 5 минут»</p></div>
+          <div class="tbl-wrap" style="margin-top:22px;">
+            <table class="cmp">
+              <tr><th>Было</th><th>Стало</th></tr>
+              <tr><td>«Оплата высокая. Условия обсуждаются»</td><td class="good">«2 700–3 200 ₽ в день»</td></tr>
+              <tr><td>«Гибкие смены» без деталей</td><td class="good">«3–4 часа в день или полный день»</td></tr>
+              <tr><td>«Официальное оформление» (звучит как долгая процедура)</td><td class="good">«Оформление за 15 минут — без офиса»</td></tr>
+              <tr><td>Штампы: «бонусы», «дружный коллектив»</td><td class="good">«Выплаты каждый день», «работай в своём районе»</td></tr>
+            </table>
+          </div>
+          <p style="margin-top:14px; font-size:13px; color:var(--clay);">Чего избегать в заголовке: начала со слов «Вакансия»/«Требуется», КАПСА и цифр, которые нельзя подтвердить.</p>
+        </div>
+
+        <div class="tab-panel" data-panel="mocks">
+          <p style="font-size:14px; color:var(--clay); max-width:66ch; margin-bottom:4px;">Готовые макеты — layout и текст. Вместо плейсхолдера подставьте своё фото: курьера с термосумкой или саму термосумку на фоне города.</p>
+          <div class="mockrow">
+            <div class="mock">
+              <div class="mock-photo"><span>Фото:<br>курьер с термосумкой</span></div>
+              <div class="mock-body">
+                <p class="mock-title">Курьер без опыта: до 3 500 ₽ за смену</p>
+                <p class="mock-price">от 2 700 ₽ / смена</p>
+                <p class="mock-text">Можно пешком, старт в день обращения. Выплаты каждый день на карту.</p>
+                <div class="mock-foot"><span class="mock-platform">Авито</span><span>Сегодня, 10:00</span></div>
+              </div>
+            </div>
+            <div class="mock">
+              <div class="mock-photo"><span>Фото:<br>термосумка крупным планом</span></div>
+              <div class="mock-body">
+                <p class="mock-text" style="margin-bottom:6px;">Ищем курьеров в свой район — гибкий график, выплаты каждый день, без опыта. Пишите в личку 👇</p>
+                <div class="mock-foot"><span class="mock-platform">VK, пост в чат</span><span>❤ 12 · 💬 4</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="onboard">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag petrol">От отклика до линии</span>
+        <h2>Онбординг</h2>
+        <p class="lead">Путь должен занимать часы, не дни. Каждый этап — фильтр.</p>
+      </div>
+      <div class="route reveal d1">
+        <div class="route-spine" aria-hidden="true"></div>
+        <div class="route-dot" aria-hidden="true"></div>
+        <div class="stop"><div class="stop-num">1</div><h3>Отклик и касание</h3><p>Подтверждение телефона «привязывает» кандидата к парку — важен быстрый первый контакт, в идеале в течение часа.</p></div>
+        <div class="stop"><div class="stop-num">2</div><h3>Регистрация СМЗ</h3><p>Ввод личных данных и документов; если статус самозанятого ещё не оформлен, помогаете пройти за один визит или звонок.</p></div>
+        <div class="stop"><div class="stop-num">3</div><h3>Инструктаж</h3><p>Короткое обучение в приложении Яндекс Про, 15–30 минут, открывает доступ к работе.</p></div>
+        <div class="stop"><div class="stop-num">4</div><h3>Получение термокороба</h3><p>Убедитесь, что предыдущие шаги пройдены, и только потом направляйте за термокоробом — свой в хорошем состоянии подойдёт при фотоконтроле, либо забрать в ПВЗ Яндекс.Маркета.</p></div>
+        <div class="stop"><div class="stop-num">5</div><h3>Первая линия</h3><p>Сопровождение на первой смене: заказы, выплаты, обращения. Новичку первые 7 слотов доступны только плановые.</p></div>
+      </div>
+
+      <h3 class="sub reveal d2">Скрипты онбординга</h3>
+      <div class="script-card reveal d2"><b>Сразу после отклика</b><p>«Спасибо за отклик! Можно начать уже сегодня — нужен паспорт и статус самозанятого, если ещё не оформлен, поможем за 10 минут. Когда удобно подъехать или созвониться?»</p></div>
+      <div class="script-card reveal d2"><b>Приглашение на инструктаж</b><p>«Ждём вас [дата, время, адрес] — возьмите паспорт. Выдадим термокороб и экипировку, покажем приложение. Займёт около 30 минут».</p></div>
+      <div class="script-card reveal d2"><b>После обучения в приложении</b><p>«Обучение пройдено — можно выходить на линию. Если на первой смене что-то будет непонятно, пишите сюда напрямую, ответим быстро».</p></div>
+    </div>
+  </section>
+
+  <section id="retain">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag petrol">Второй и третий рычаг</span>
+        <h2>Рост SH и удержание</h2>
+        <p class="lead">Дополнительная мотивация курьеру возможна только со стороны парка. У сервиса — базовые правила игры: тариф, коэффициенты. Держит курьера у вас и растит его SH — то, что вы добавляете сверху.</p>
+      </div>
+
+      <div id="growth">
+        <ul class="plist reveal d1">
+          <li>Яндекс формирует персональные цели для курьера, если они есть, и доплачивает за их выполнение</li>
+          <li>Задача парка — не просто уведомить о цели, а замотивировать её закрыть: напомнить, объяснить выгоду в деньгах, подбодрить в процессе</li>
+          <li>Чем чаще и дольше курьер на линии, тем больше зарабатывает — особенно в сезон, непогоду и час пик</li>
+        </ul>
+        <div class="formula reveal d2">
+          <code>Обычная смена — 8 заказов. В дождь на тех же 4 часах спрос выше и действует коэффициент — реально выходит 12–13 заказов по повышенной ставке.</code>
+          <p>Разница за смену — от 800 до 1 500 ₽. За месяц из 4 дождливых дней это лишние 3 000–6 000 ₽ на пустом месте. Именно такую фразу, с реальными цифрами по своему городу, нужно говорить курьеру лично — не полагаться, что он сам посчитает. (Цифры — иллюстративный пример, заполните своими ставками.)</p>
+        </div>
+        <ul class="plist reveal d3">
+          <li>Информировать о личных целях лично, а не полагаться на push в приложении</li>
+          <li>Точечные push-уведомления от самого парка на дефицитные слоты — «выйди в этот час, держим доплату»</li>
+        </ul>
+
+        <div data-stage-min="1">
+          <h3 class="sub reveal d3">Командные цели — механика, а не лозунг <span class="chip" style="font-size:11px; padding:4px 10px; vertical-align:middle;">от ~20 курьеров</span></h3>
+          <p class="reveal d3" style="max-width:70ch; font-size:15px; color:var(--clay);">Личная цель мотивирует одного человека. Командная — создаёт социальное давление, которое парк больше нигде не получит бесплатно.</p>
+          <div class="formula reveal d3">
+            <code>Разбейте активных курьеров на команды по 6–10 человек — по району или смене, не случайно. Дайте команде общую цель на неделю (например, суммарно 500 часов на линии) и повесьте прогресс в чат — видно всем, обновляется каждый день.</code>
+            <p>Если команда закрывает цель — бонус получает <b style="color:var(--ink);">каждый участник</b>, а не только те, кто больше наработал. Это ключевой момент: сильные курьеры начинают сами подтягивать слабых («ты сегодня выходишь? нам не хватает 20 часов») — репетитор появляется бесплатно, вместо вас. Команда против команды в соседнем районе — усиливает эффект без единого рубля бюджета. На нескольких зонах сразу сравнивайте команды только внутри похожего спроса — гонять команду тихого спального района против команды у делового центра нечестно и демотивирует, а не подстёгивает.</p>
+          </div>
+          <div class="flagbox warn reveal d3"><p><b>Проверяйте на накрутку.</b> Групповые бонусы и реферальные программы — классическая точка фрода: самореферал через второй аккаунт, договорной обмен заказами внутри команды ради общей цели. Резкий скачок заказов без роста реального времени на линии — почти всегда сигнал накрутки, а не роста. Стандарты сервиса действуют независимо от ваших внутренних конкурсов, и нарушения бьют по репутации парка у сервиса — проверяйте аномалии до выплаты бонуса, не после.</p></div>
+        </div>
+      </div>
+
+      <h3 class="sub reveal d1">Три причины оттока — и что с каждой делать</h3>
+      <div class="tbl-wrap reveal d1">
+        <table class="cmp">
+          <tr><th>Причина</th><th>Что делать</th></tr>
+          <tr><td><b>Не доработал до стабильности.</b> Основной отток — не у «старичков», а на самых первых этапах</td><td>Скрипт «Новичок, день 1» и триггеры первых дней — не формальность, а точка, где реально теряются деньги</td></tr>
+          <tr><td><b>Уход в «прямую самозанятость».</b> Убирает парк как посредника, не идёт к конкуренту</td><td>Шесть ролей парка из блока «О парке» должны быть ощутимы постоянно, не только при оформлении</td></tr>
+          <tr><td><b>Переманил соседний парк.</b> На среднем масштабе — чаще реальная причина, чем первые две</td><td>Раз в квартал сверяйте свою комиссию и бонусы с 2–3 ближайшими конкурирующими парками</td></tr>
+        </table>
+      </div>
+
+      <h3 class="sub reveal d2">Что делает курьера лояльным</h3>
+      <div class="tbl-wrap reveal d2">
+        <table class="cmp">
+          <tr><th>Лоялен, когда</th><th>Уходит, когда</th></tr>
+          <tr><td>Оформление простое даже без опыта; парк даёт базовую экипировку, а великурьерам — транспорт в аренду или со скидкой</td><td>Не объяснили, как оформить самозанятость и выбрать парк в Яндекс Про</td></tr>
+          <tr><td>Парк всегда на связи</td><td>Долго отвечают на вопросы про выплаты</td></tr>
+          <tr><td>Парк разбирается в проблеме и даёт понятный ответ</td><td>Отвечают типовыми фразами на срочные ситуации</td></tr>
+        </table>
+      </div>
+
+      <h3 class="sub reveal d2">Триггеры — когда именно звонить</h3>
+      <p class="reveal d2" style="font-size:14.5px; color:var(--clay); max-width:64ch;">Скрипт без повода — шаблон, а не инструмент.</p>
+      <div class="tbl-wrap reveal d2">
+        <table class="cmp">
+          <tr><th>Триггер</th><th>Действие</th></tr>
+          <tr><td>Выполнил первый заказ</td><td>Скрипт «Новичок, день 1» — в тот же день</td></tr>
+          <tr><td>Дошёл до 10 / 20 / 50 заказов</td><td>Скрипт «Мидл» — в течение суток</td></tr>
+          <tr><td>Не выходил на линию 3 дня подряд</td><td>Скрипт «Потеряшка» — звонок, не сообщение</td></tr>
+          <tr><td>SH упал на 30%+ к прошлой неделе</td><td>Личный звонок — узнать причину до того, как решил уйти</td></tr>
+          <tr><td>Не выполнил личную цель второй период подряд</td><td>Объяснить выгоду в деньгах, не просто напомнить</td></tr>
+          <tr><td>6+ месяцев в парке, стабильно активен</td><td>Скрипт «Старичок» + статус наставника</td></tr>
+        </table>
+      </div>
+
+      <div class="doc-grid reveal d2" data-stage-min="2">
+        <div class="doc-card"><h4>Что автоматизировать по мере роста</h4><p style="margin-bottom:0;">При 50+ активных курьерах ручной обзвон каждого триггера физически не тянет даже нанятый диспетчер. Рутинные, предсказуемые триггеры (день 1, достижение 10/20/50 заказов) переводите на автоматические сообщения — подойдёт обычный Telegram-бот-конструктор или триггерные рассылки в любой простой CRM, специальный сервис не нужен. Живой звонок оставляйте на то, где решает эмпатия и есть риск потери: «потеряшка», падение SH на 30%+, невыполненная цель второй раз подряд.</p></div>
+      </div>
+
+      <h3 class="sub reveal d3">Постоянный сбор обратной связи</h3>
+      <p class="reveal d3" style="font-size:15px; color:var(--clay); max-width:68ch;">И от тех, кто активно работает, и от тех, кто заявил о желании уйти. Первое показывает, что чинить, пока не поздно; второе — что уже сломалось.</p>
+
+      <div class="flagbox reveal d3"><p><b>Зачем это парку, а не просто «для заботы».</b> ОС — единственный способ узнать о проблеме раньше, чем курьер молча пропадёт: жалобы на одну и ту же тему от нескольких человек — это система, а не случайность, и её дешевле починить сейчас, чем терять курьеров каждый месяц по одной причине. Плюс это бесплатная разведка: курьеры, которые до вас работали в других парках или сервисах, сами расскажут, что там устроено лучше — не нужно гадать, с чем вы конкурируте.</p></div>
+
+      <div class="doc-grid reveal d3">
+        <div class="doc-card"><h4>Пульс-опрос активных · раз в 2–4 недели</h4><p style="margin-bottom:10px;">2–3 вопроса через Telegram-бот, форму или устно на созвоне — не длиннее минуты:</p><ul style="margin:0;"><li>Что мешало сегодня/на этой неделе выходить чаще?</li><li>Чего не хватает по сравнению с другими парками или сервисами, где вы работали?</li><li>Оценка 1–5: рекомендовали бы парк знакомому?</li></ul></div>
+        <div class="doc-card"><h4>Разговор при уходе · обязательно, не автопрощание</h4><p style="margin-bottom:10px;">Личный звонок, не сообщение. Три вопроса, которые реально дают ответ:</p><ul style="margin:0;"><li>Что стало последней каплей?</li><li>Это про деньги, про людей или про неудобство процесса?</li><li>Что могло бы изменить решение — если вообще что-то могло?</li></ul></div>
+      </div>
+
+      <h3 class="sub reveal d3">Что делать с ответами — иначе сбор бессмысленен</h3>
+      <ul class="plist reveal d3">
+        <li><b>Разбирайте раз в месяц</b>, не по каждому ответу отдельно — совпадает с пунктом «разбор оттока» в ритме парка ниже. Одна жалоба — мнение, три одинаковых — уже проблема процесса</li>
+        <li><b>Порог для немедленного действия:</b> если один и тот же повод для ухода звучит от 3+ курьеров за месяц — это не «доработаем как-нибудь», а следующий пункт в плане на неделю</li>
+        <li><b>Закрывайте петлю публично.</b> Если что-то поменяли по итогам ОС — скажите об этом в общем чате прямо: «вы просили — сделали». Это конвертирует опрос в доверие и работает на то самое чувство «своего парка» из блока «Сообщество» ниже. Молчаливый сбор ОС без видимых изменений быстро превращается в опрос, на который никто больше не отвечает</li>
+      </ul>
+
+      <h3 class="sub reveal d3">Прозвон по сегментам — три тона, выбери свой</h3>
+      <p class="reveal d3" style="font-size:13.5px; color:var(--clay); margin-bottom:4px;">Раскройте нужный сегмент — остальные скрипты не будут занимать экран, пока не понадобятся.</p>
+      <p class="reveal d3" style="font-size:12px; color:var(--clay); margin-bottom:8px;">Цвет полоски слева на карточке = тон: <span style="color:#8A6A00; font-weight:700;">жёлтый</span> — эмпатичный, <span style="color:var(--ink); font-weight:700;">чёрный</span> — деловой, <span style="color:var(--petrol); font-weight:700;">красный</span> — игровой</p>
+
+      <div class="faq-list reveal d3">
+        <div class="faq-item">
+          <button class="faq-q"><span>Новичок, день 1</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="tab-group" data-tabgroup="newbie" style="margin:0; padding:0 22px 22px;">
+            <div class="tab-bar">
+              <button class="tab-btn active" data-tab="e">Эмпатичный</button>
+              <button class="tab-btn" data-tab="d">Деловой</button>
+              <button class="tab-btn" data-tab="g">Игровой</button>
+            </div>
+            <div class="tab-panel active" data-panel="e"><div class="script-card"><p>«Привет! Ты в парке всего сутки — как всё прошло? Если что-то непонятно с приложением или заказами — пиши, поможем в любое время».</p></div></div>
+            <div class="tab-panel" data-panel="d"><div class="script-card"><p>«Здравствуйте, это [Парк]. Фиксируем: первый заказ выполнен. По вопросам приложения, слотов и выплат — обращайтесь по этому номеру».</p></div></div>
+            <div class="tab-panel" data-panel="g"><div class="script-card"><p>«Первый заказ есть! Дальше будет проще. За первые 10 заказов у нас бонус — расскажем, как получить, когда будешь готов(а)».</p></div></div>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Мидл, 10 / 20 / 50 заказов</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="tab-group" data-tabgroup="mid" style="margin:0; padding:0 22px 22px;">
+            <div class="tab-bar">
+              <button class="tab-btn active" data-tab="e">Эмпатичный</button>
+              <button class="tab-btn" data-tab="d">Деловой</button>
+              <button class="tab-btn" data-tab="g">Игровой</button>
+            </div>
+            <div class="tab-panel active" data-panel="e"><div class="script-card"><p>«20 заказов позади — уже видно, что получается. Как ощущения, всё удобно с графиком и заказами?»</p></div></div>
+            <div class="tab-panel" data-panel="d"><div class="script-card"><p>«Информируем: вы выполнили 20 заказов. Напоминаем про личную цель на этот период — за её выполнение начисляется доплата от Яндекса».</p></div></div>
+            <div class="tab-panel" data-panel="g"><div class="script-card"><p>«20 заказов — красавчик! Сейчас конкурс месяца, топ-10 по заказам получают приз. Ты в неплохой позиции, разгонишься — есть шанс попасть в топ».</p></div></div>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Старичок, постоянный</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="tab-group" data-tabgroup="old" style="margin:0; padding:0 22px 22px;">
+            <div class="tab-bar">
+              <button class="tab-btn active" data-tab="e">Эмпатичный</button>
+              <button class="tab-btn" data-tab="d">Деловой</button>
+              <button class="tab-btn" data-tab="g">Игровой</button>
+            </div>
+            <div class="tab-panel active" data-panel="e"><div class="script-card"><p>«Ты с нами уже [N] месяцев и стабильно в топе. Как тебе последнее время, всё ок с заказами и выплатами?»</p></div></div>
+            <div class="tab-panel" data-panel="d"><div class="script-card"><p>«Вы один из самых активных курьеров парка за последние [N] месяцев. Готовы обсудить дополнительные условия — свяжитесь с персональным менеджером».</p></div></div>
+            <div class="tab-panel" data-panel="g"><div class="script-card"><p>«Ты уже старожил! Есть друзья, кто ищет подработку? За каждого — бонус, а тебе — статус наставника, если захочешь помогать новичкам».</p></div></div>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q"><span>Потеряшка, реактивация</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><div class="tab-group" data-tabgroup="lost" style="margin:0; padding:0 22px 22px;">
+            <div class="tab-bar">
+              <button class="tab-btn active" data-tab="e">Эмпатичный</button>
+              <button class="tab-btn" data-tab="d">Деловой</button>
+              <button class="tab-btn" data-tab="g">Игровой</button>
+            </div>
+            <div class="tab-panel active" data-panel="e"><div class="script-card"><p>«Привет! Заметили, что ты давно не выходил(а) на линию. Всё в порядке? Если что-то не понравилось — расскажи, поправим».</p></div></div>
+            <div class="tab-panel" data-panel="d"><div class="script-card"><p>«Здравствуйте. Фиксируем длительное отсутствие активности. Если решили прекратить сотрудничество — подскажите причину, это поможет нам стать лучше».</p></div></div>
+            <div class="tab-panel" data-panel="g"><div class="script-card"><p>«Соскучились) Вернёшься на линию в течение недели — сделаем первую смену с повышенным бонусом. Что скажешь?»</p></div></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="faq-list reveal d3" style="margin-top:24px;" data-stage-min="2">
+        <div class="faq-item">
+          <button class="faq-q"><span>Ещё инструменты: геймификация, сообщество, мерч</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><div style="padding:0 22px 22px;">
+
+            <h4 style="font-size:15px; margin:6px 0 6px;">Геймификация — калибровка сложности решает всё <span class="chip" style="font-size:11px; padding:4px 10px; vertical-align:middle;">от ~50 курьеров</span></h4>
+            <p style="max-width:70ch; font-size:14.5px; color:var(--clay); margin-bottom:12px;">Главная ошибка — ставить цель либо слишком легко, либо слишком тяжело. Оба варианта убивают мотивацию, просто по-разному.</p>
+            <div class="flagbox">
+              <p><b>Если топ-статус получают 80% курьеров</b> — это не достижение, а участие, статус ничего не стоит. <b>Если его не получает почти никто</b> — курьеры перестают пытаться уже через месяц. Рабочий диапазон — верхний уровень должен доставаться <b style="color:var(--ink);">15–25% активных курьеров</b> за период: достаточно многим, чтобы выглядело реальным, и достаточно немногим, чтобы стоило усилий.</p>
+            </div>
+            <ul class="plist">
+              <li><b>Считайте факт, а не ощущение.</b> После каждого месяца смотрите реальное распределение результатов — если топ-уровень взяли 60%, поднимайте планку; если 5% — опускайте. Статичная цель, поставленная один раз, устаревает за 2–3 месяца</li>
+              <li><b>Многоуровневая лестница, не один порог.</b> Например: бронза — 40 заказов в неделю, серебро — 80, золото — 150. Большинство попадает хоть в какой-то уровень (никто не уходит ни с чем), но золото остаётся редким и статусным</li>
+              <li><b>Ротация челленджа.</b> Меняйте формат раз в 4–6 недель (то заказы, то часы в непогоду, то новых друзей) — застывший рейтинг превращается в обои, на которые никто не смотрит после первого месяца</li>
+              <li><b>Награда — не только деньги.</b> Публичное имя в топе чата, приоритетный доступ к хорошим слотам, статус наставника — работает на людей, которым уже хватает денег, но не хватает признания</li>
+            </ul>
+
+            <h4 style="font-size:15px; margin:24px 0 6px;">Сообщество — то, что не даст уйти «напрямую» <span class="chip" style="font-size:11px; padding:4px 10px; vertical-align:middle;">от ~50 курьеров</span></h4>
+            <p style="max-width:70ch; font-size:14.5px; color:var(--clay); margin-bottom:12px;">Курьер без связей внутри парка держится только деньгами — а деньги легко предложить и без вас. Курьер, у которого здесь друзья и статус, теряет что-то реальное при уходе. Это не абстракция, а прямой ответ на риск «прямой самозанятости» из таблицы причин оттока выше.</p>
+            <div class="doc-grid">
+              <div class="doc-card"><h4>Регулярные события, не разовые</h4><p style="margin-bottom:0;">Раз в месяц — что-то живое: подведение итогов конкурса с вручением при всех, сезонная встреча, совместный выезд. Разовая акция забывается за неделю, регулярный ритуал становится привычкой возвращаться.</p></div>
+              <div class="doc-card"><h4>Роль модератора-курьера</h4><p style="margin-bottom:0;">Опытный курьер ведёт чат, приветствует новичков, гасит конфликты — неформально, но заметно. Это тот самый наставник со статусом из геймификации, только в роли сообщества, не обучения.</p></div>
+              <div class="doc-card"><h4>Доска почёта, которую видно</h4><p style="margin-bottom:0;">Закреплённое сообщение в чате с топом недели/месяца по именам — не в приложении, где никто не смотрит, а там, где курьеры общаются каждый день.</p></div>
+              <div class="doc-card"><h4>Голос в решениях парка</h4><p style="margin-bottom:0;">Спросить у активных курьеров, какой мерч заказать или какой приз в следующий конкурс — 10 минут вашего времени превращаются в ощущение «это наш парк», а не «место, откуда я получаю заказы».</p></div>
+            </div>
+
+            <h4 style="font-size:15px; margin:24px 0 6px;">Ещё нестандартные ходы</h4>
+            <ul class="plist">
+              <li>Наставничество: опытный курьер закреплён за новичком на первые две недели, бонус получают оба при успешной адаптации</li>
+              <li>Экстренная линия «техника сломалась» — подменный велосипед/самокат в течение часа, чтобы не терять смену</li>
+              <li>Локальные партнёрства парка — скидки в ближайших кафе или автосервисе для своих курьеров</li>
+              <li>Быстрый аванс при экстренной ситуации у курьера — сигнал «мы на твоей стороне», а не только сервис</li>
+            </ul>
+
+            <h4 style="font-size:15px; margin:24px 0 6px;">Мерч</h4>
+            <p style="font-size:14.5px; color:var(--clay); max-width:66ch; margin:0;">От ручек и стикеров до футболок и худи — знак принадлежности, не стимул сам по себе. Уместен как бонус за веху (первый месяц, 100 заказов) или как приз в конкурсе — не как разовая раздача.</p>
+
+          </div></div>
+        </div>
+      </div>
+
+      <div id="rhythm">
+        <h3 class="sub reveal d1">Ритм парка — всё выше в систему, не список тем</h3>
+        <h4 style="font-size:15px; margin:18px 0 6px;">Что мерить каждую неделю — одной панелью</h4>
+        <div class="tbl-wrap reveal d1">
+          <table class="cmp">
+            <tr><th>Метрика</th><th>Где смотреть</th><th>Ориентир</th></tr>
+            <tr><td>Чистый прирост курьеров, месяц к месяцу</td><td>Новые за месяц минус ушедшие за месяц</td><td>Должен расти сам по себе — если только держится в нуле, вы не масштабируетесь, а компенсируете отток</td></tr>
+            <tr><td>Конверсия заявка → выход на линию</td><td>Считать вручную по заявкам за неделю</td><td>34–40%</td></tr>
+            <tr><td>Стоимость привлечённого курьера</td><td>Расход на канал ÷ число вышедших на линию</td><td>2 500–3 000 ₽</td></tr>
+            <tr><td>SH на активного курьера</td><td>Диспетчерская</td><td>Растёт неделя к неделе — если нет, смотрите блок «Рост SH» выше</td></tr>
+            <tr><td>Отток за первые 14 дней</td><td>Считать вручную по когорте новичков</td><td>Ниже — тем быстрее окупается CAC</td></tr>
+            <tr><td>Доля активных, не выходивших 3+ дня</td><td>Диспетчерская</td><td>Триггер для звонков «потеряшкам»</td></tr>
+          </table>
+        </div>
+        <div class="role-grid reveal d1">
+          <div class="role-card"><h4>Каждый день</h4><p>Ответить на новые заявки в течение часа · написать «Новичок, день 1» тем, кто вышел впервые вчера · точечный push на дефицитные слоты завтра</p></div>
+          <div class="role-card"><h4>Каждую неделю</h4><p>Прозвон по триггерам «Мидл» и «Потеряшка» · пульс-опрос ОС у активных · обновить рейтинг недели в чате</p></div>
+          <div class="role-card"><h4>Каждый месяц</h4><p>Итоги турнира и приз · разбор оттока по ОС от ушедших · сверка экономики (блок ниже) · открытый созвон с руководителем парка</p></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="economics">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag">Прямой ответ</span>
+        <h2>Экономика парка Яндекс Еды</h2>
+        <p class="lead">«А мне-то что с этого» — без этого блока всё выше повисает в воздухе.</p>
+      </div>
+      <div class="econ-grid reveal d1">
+        <div class="ticket">
+          <div class="ticket-stub"><span class="ticket-kicker">Основной источник</span></div>
+          <div class="ticket-body"><h3>Комиссия за заказ</h3><p>Начисляется ежедневно, автоматически. Растёт вместе с активностью курьеров.</p></div>
+        </div>
+        <div class="ticket dark">
+          <div class="ticket-stub"><span class="ticket-kicker">Растёт с активностью</span></div>
+          <div class="ticket-body"><h3>Персональные цели</h3><p>Доля парка при выполнении курьерами перс. целей от Яндекса.</p></div>
+        </div>
+        <div class="ticket">
+          <div class="ticket-stub"><span class="ticket-kicker">Стартовый доход</span></div>
+          <div class="ticket-body"><h3>Бонус за новичка</h3><p>Базовая ставка — от 5 заказов за 20 дней. Максимум — 130 заказов за 20 дней (Onboard–Junior) или 100 (Middle–Senior). Суммы разнятся по городу.</p></div>
+        </div>
+        <div class="ticket dark">
+          <div class="ticket-stub"><span class="ticket-kicker">Постоянный поток</span></div>
+          <div class="ticket-body"><h3>Комиссия с вывода денег</h3><p>С каждого вывода средств курьером.</p></div>
+        </div>
+      </div>
+      <p class="reveal d2" style="margin-top:26px; font-size:14.5px; color:var(--clay); max-width:72ch;">Для парков, которые сейчас работают только с такси: кандидаты, не прошедшие классификатор такси, не обязательно уходят ни с чем — их можно направить в Еду и получить второй источник дохода на той же воронке, без отдельного бюджета на привлечение. Выплаты и комиссии работают по той же логике, что и в такси.</p>
+      <div class="chiprow reveal d3"><span class="chip">Рекомендуемая комиссия парка с заказа — 3–5%. Сервис проценты не регламентирует</span></div>
+
+      <h3 class="sub reveal d2">Юнит-экономика на одного курьера — прикидка</h3>
+      <div class="formula reveal d2">
+        <code>15 заказов в смену × 20 смен в месяц = 300 заказов. При среднем чеке 600 ₽ и комиссии парка 4% — это ≈7 200 ₽ вашего дохода с одного активного курьера в месяц, плюс доля с персональных целей.</code>
+        <p>Из этих ~7 200 ₽ вычтите стоимость привлечения (2 500–3 000 ₽ разово) и бонус за новичка (до 10 000 ₽ в первый месяц) — первый месяц курьера часто в минус или в ноль для вас, прибыль начинается со второго-третьего. Это и есть причина, почему блок «Удержание» выше — не про заботу, а про то, когда вы вообще выходите в плюс. (Средний чек и число заказов — иллюстративные, подставьте свои цифры по городу.)</p>
+      </div>
+
+      <div class="doc-grid reveal d3">
+        <div class="doc-card" data-stage-min="1"><h4>Кассовый разрыв — учитывайте заранее</h4><p style="margin-bottom:0;">Бонус за новичка и реферальные выплаты вы платите сразу, а комиссию собираете постепенно, заказ за заказом. По прикидке из юнит-экономики выше — это ≈13 000 ₽ разового расхода на одного нового курьера (CAC + бонус) до того, как он начнёт приносить комиссию. Планируете набрать 30 новых курьеров за месяц — держите резерв около 390 000 ₽, а не рассчитывайте закрыть их из текущей комиссии.</p></div>
+        <div class="doc-card" data-stage-min="1"><h4>Когда нанимать первого сотрудника</h4><p style="margin-bottom:0;">Ориентир — 20–30 активных курьеров. До этого прозвон по триггерам и онбординг физически тянет один человек. После — время на звонки начинает конкурировать со временем на привлечение новых, и оба процесса проседают одновременно. Первая роль для найма — не рекрутер, а диспетчер/поддержка: снимает с вас рутину триггеров, а привлечение и стратегию оставляет вам.</p></div>
+        <div class="doc-card" data-stage-min="2"><h4>Куда девать растущую маржу <span class="chip" style="font-size:11px; padding:4px 10px; vertical-align:middle;">от ~50 курьеров</span></h4><p style="margin-bottom:0;">Когда экономика вышла в стабильный плюс, не копите её просто так — реинвестируйте по приоритету: сначала резерв на кассовый разрыв (см. выше), затем бюджет на масштабирование каналов привлечения, затем — штат. Бонусный фонд для конкуренции с соседними парками поднимайте в последнюю очередь и только если видите реальный отток по этой причине, а не заранее.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="head-block reveal">
+        <span class="tag">Реальные вопросы от парков Яндекс Еды</span>
+        <h2>FAQ</h2>
+      </div>
+      <div class="faq-list reveal d1">
+        <div class="faq-item">
+          <button class="faq-q"><span>Где лучше всего размещаться и какие каналы использовать?</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><p>Начните с ВКонтакте и офлайн-реферальной программы — лучшая конверсия и самая низкая цена найма. Директ подключайте от ~20 заявок в день, Авито — от 100+.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Какие комиссии ставят парки?</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><p>Сервис проценты не регламентирует, рекомендация — 3–5% комиссии с заказа.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Можно ли парку Яндекс Еды работать не только с Яндекс Едой?</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><p>Да, это нормально и не противоречит сотрудничеству.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Будет ли реферальная программа «приведи друга» с бонусом от Еды — для самих парков?</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><p>В разработке, запуск в ближайшее время — точной даты пока нет.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Предоставляет ли сервис помощь в привлечении курьеров — базы, лиды?</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><p>Сейчас высадку лидов в парки не делаем. Процесс в разработке, вопрос упирается в юридические тонкости.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Можно узнать цифры «живого» крупного парка — для сравнения себя с рынком?</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><p>Ориентир по одному из топ-парков (обезличенно, публичные данные): 120 000+ подключённых курьеров, 4 000+ новых регистраций в месяц, присутствие в 130 городах, 10 лет на рынке.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q"><span>Кто помогает парку, если возникла нестандартная ситуация?</span><span class="faq-plus" aria-hidden="true"></span></button>
+          <div class="faq-a"><p>Отдельная линия поддержки, которая занимается только парками, плюс закреплённый персональный менеджер — подключается сразу при регистрации в диспетчерской, без отдельной заявки.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="wrap">
+      <h2>Готовы вырасти в топ парк Яндекс Еды?</h2>
+      <p class="footer-note">Инструменты уже подключены — дело за системой.</p>
+      <div class="footer-ways">
+        <div class="way"><b>Менеджер</b><span>Персональный менеджер парка — по вопросам роста</span></div>
+        <div class="way"><b>Поддержка</b><span>Отдельная линия для парков, 24/7 по курьерам</span></div>
+        <div class="way"><b>Гид по подключению</b><span>Диспетчерская, приложение ПРО и экономика — в <a href="index.html" style="color:var(--yolk); text-decoration:underline;">презентацию онбординг</a></span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{ threshold:.16 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else { revealEls.forEach(function(el){ el.classList.add('in'); }); }
+
+  function animateCount(el){
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix || '';
+    if(reduced){ el.textContent = prefix + target + suffix; return; }
+    var start = performance.now(), dur = 1300;
+    function tick(now){
+      var p = Math.min(1, (now-start)/dur);
+      var eased = 1 - Math.pow(1-p,3);
+      el.textContent = prefix + Math.round(target*eased) + suffix;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var counters = document.querySelectorAll('[data-count]');
+  if('IntersectionObserver' in window){
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); } });
+    },{ threshold:.6 });
+    counters.forEach(function(el){ cio.observe(el); });
+  } else { counters.forEach(animateCount); }
+
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var btn = item.querySelector('.faq-q');
+    var panel = item.querySelector('.faq-a');
+    btn.addEventListener('click', function(){
+      var open = item.classList.toggle('open');
+      panel.style.maxHeight = open ? panel.scrollHeight + 'px' : null;
+    });
+  });
+
+  document.querySelectorAll('[data-tabgroup]').forEach(function(group){
+    var btns = group.querySelectorAll('[data-tab]');
+    var panels = group.querySelectorAll('[data-panel]');
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        btns.forEach(function(b){ b.classList.remove('active'); });
+        panels.forEach(function(p){ p.classList.remove('active'); });
+        btn.classList.add('active');
+        var target = group.querySelector('[data-panel="'+btn.dataset.tab+'"]');
+        if(target) target.classList.add('active');
+      });
+    });
+  });
+
+  var navLinks = document.querySelectorAll('.nav-links a');
+  var navSections = Array.prototype.map.call(navLinks, function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  if('IntersectionObserver' in window && navSections.length){
+    var navIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var id = '#' + e.target.id;
+          navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')===id); });
+          document.querySelectorAll('.nav-group').forEach(function(g){
+            g.classList.toggle('has-active', !!g.querySelector('a.active'));
+          });
+        }
+      });
+    }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+    navSections.forEach(function(s){ navIo.observe(s); });
+  }
+
+  var navGroups = document.querySelectorAll('.nav-group');
+  navGroups.forEach(function(group){
+    var btn = group.querySelector('.nav-group-btn');
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var willOpen = !group.classList.contains('open');
+      navGroups.forEach(function(g){ g.classList.remove('open'); });
+      if(willOpen) group.classList.add('open');
+    });
+  });
+  document.addEventListener('click', function(){
+    navGroups.forEach(function(g){ g.classList.remove('open'); });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ navGroups.forEach(function(g){ g.classList.remove('open'); }); }
+  });
+
+  var stageFilter = document.getElementById('stageFilter');
+  if(stageFilter){
+    var stageBtns = stageFilter.querySelectorAll('[data-stage]');
+    var stagedEls = document.querySelectorAll('[data-stage-min]');
+    stageFilter.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-stage]');
+      if(!btn) return;
+      stageBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var val = btn.dataset.stage;
+      stagedEls.forEach(function(el){
+        var min = parseInt(el.dataset.stageMin, 10);
+        el.classList.toggle('stage-dim', val !== 'all' && min > parseInt(val, 10));
+        el.classList.toggle('stage-here', val !== 'all' && min === parseInt(val, 10) && el.classList.contains('ticket'));
+      });
+    });
+  }
+
+  var routeTracks = Array.prototype.slice.call(document.querySelectorAll('.route'));
+  function updateRoutes(){
+    routeTracks.forEach(function(track){
+      var dot = track.querySelector('.route-dot');
+      var stops = track.querySelectorAll('.stop');
+      if(!dot) return;
+      var rect = track.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var total = rect.height;
+      var progress = (vh*0.55 - rect.top) / total;
+      progress = Math.max(0, Math.min(1, progress));
+      dot.style.top = (progress * (total-18)) + 'px';
+      var idx = Math.min(stops.length-1, Math.floor(progress * stops.length));
+      stops.forEach(function(s,i){ s.classList.toggle('active', i===idx && progress>0.02); });
+    });
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if(!ticking){ requestAnimationFrame(function(){ updateRoutes(); ticking=false; }); ticking = true; }
+  }, { passive:true });
+  window.addEventListener('resize', updateRoutes);
+  updateRoutes();
+})();
+</script>
+</body>
+</html>
