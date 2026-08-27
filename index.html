@@ -144,6 +144,15 @@
   .stat b{ display:block; font-family:'Unbounded',sans-serif; font-size:clamp(26px,3.4vw,38px); font-weight:800; letter-spacing:-.01em; font-variant-numeric:tabular-nums; color:var(--yolk); }
   .stat span{ font-size:13.5px; color:var(--on-block-soft); }
 
+  .section-icon{ width:52px; height:52px; border-radius:15px; background:var(--block-dark); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .section-icon svg{ width:26px; height:26px; }
+  .section-icon svg *{ stroke:var(--yolk); fill:none; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
+  .section-icon svg .fill{ fill:var(--yolk); stroke:none; }
+
+  .hero-icon{ position:absolute; z-index:1; }
+  .hero-icon svg *{ stroke:var(--block-dark); fill:none; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+  .hero-icon svg .fill{ fill:var(--block-dark); stroke:none; }
+
   .head-block{ max-width:660px; margin-bottom:36px; }
   .head-block h2{ font-size:clamp(27px,3.4vw,38px); margin-top:14px; }
   .head-block p.lead{ margin-top:14px; color:var(--clay); font-size:15.5px; max-width:62ch; }
@@ -357,7 +366,13 @@
   </nav>
 
   <section class="hero">
-    <div class="hero-blob" aria-hidden="true"></div>
+    <div class="hero-blob" aria-hidden="true">
+      <svg class="hero-icon" viewBox="0 0 120 120" style="width:46%; top:28%; left:26%;" aria-hidden="true">
+        <rect x="30" y="42" width="60" height="60" rx="10"/>
+        <path d="M45 42V32C45 24 55 18 60 18C65 18 75 24 75 32V42"/>
+        <rect class="fill" x="38" y="60" width="44" height="9"/>
+      </svg>
+    </div>
     <div class="wrap">
       <div class="hero-inner">
         <span class="tag reveal">Гайд по росту для парков Яндекс Еды</span>
@@ -391,6 +406,7 @@
   <section id="value">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><circle cx="18" cy="24" r="11"/><circle cx="30" cy="24" r="11"/></svg></div>
         <span class="tag petrol">Прежде чем начать</span>
         <h2>Парк Яндекс Еды — не посредник, а система роста</h2>
         <p class="lead">Поздравляем с началом сотрудничества — вы вошли в программу с масштабом выше. Но масштаб сервиса не делает работу за вас: то, что держит курьера именно у вас, а не в соседнем парке или напрямую у сервиса, — это шесть ролей ниже. Ни одну из них не сыграет алгоритм.</p>
@@ -428,6 +444,7 @@
   <section id="roadmap">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><path d="M10 34V26M20 34V18M30 34V22M38 34V12"/></svg></div>
         <span class="tag petrol">Прежде чем открывать все вкладки</span>
         <h2>Стадии роста — что делать сейчас, а что пока игнорировать</h2>
         <p class="lead">Весь гайд ниже — не чек-лист «сделай всё сразу». Это разные инструменты для разных стадий. Выберите свою — блоки, которые пока рано читать, погаснут сами.</p>
@@ -465,6 +482,7 @@
   <section id="audience">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="11"/><path d="M29 29L39 39"/></svg></div>
         <span class="tag">Прежде чем привлекать</span>
         <h2>Кого вы ищете</h2>
         <p class="lead">Разный тип курьера — разный канал, разная экипировка, разный крючок в разговоре.</p>
@@ -502,6 +520,7 @@
   <section id="bonuses">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><rect x="9" y="19" width="30" height="19" rx="2"/><path d="M9 27H39M24 19V38"/><path d="M24 19C20 19 16 15 18 12C20 9 24 13 24 19ZM24 19C28 19 32 15 30 12C28 9 24 13 24 19Z"/></svg></div>
         <span class="tag petrol">Аргумент на собеседовании</span>
         <h2>Почему выгодно быть курьером Яндекс Еды</h2>
         <p class="lead">Не абстрактное «выгодно», а список, который можно проговорить за минуту.</p>
@@ -526,6 +545,7 @@
   <section id="attract">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><path d="M12 20L34 12V36L12 28V20Z"/><path d="M12 20H8V28H12"/><path d="M18 30L20 38"/><path d="M34 17C38 18 38 30 34 31"/></svg></div>
         <span class="tag">Воронка</span>
         <h2>Привлечение курьеров</h2>
         <p class="lead">Канал приводит заявку — до линии реально доходит меньше половины. Разрыв закрывается скоростью обработки и порядком подключения каналов.</p>
@@ -660,6 +680,7 @@
   <section id="onboard">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><rect x="10" y="8" width="28" height="32" rx="3"/><path d="M16 18L20 22L28 14M16 28H32M16 34H32"/></svg></div>
         <span class="tag petrol">От отклика до линии</span>
         <h2>Онбординг</h2>
         <p class="lead">Путь должен занимать часы, не дни. Каждый этап — фильтр.</p>
@@ -684,6 +705,7 @@
   <section id="retain">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><path d="M16 10H32V22C32 27 28 30 24 30C20 30 16 27 16 22V10Z"/><path d="M16 12H10C10 18 13 20 16 20M32 12H38C38 18 35 20 32 20"/><path d="M24 30V36M18 40H30"/></svg></div>
         <span class="tag petrol">Второй и третий рычаг</span>
         <h2>Рост SH и удержание</h2>
         <p class="lead">Дополнительная мотивация курьеру возможна только со стороны парка. У сервиса — базовые правила игры: тариф, коэффициенты. Держит курьера у вас и растит его SH — то, что вы добавляете сверху.</p>
@@ -900,6 +922,7 @@
   <section id="economics">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><path d="M19 16V32M19 16H26C29 16 29 21 26 21H19M19 21H25"/></svg></div>
         <span class="tag">Прямой ответ</span>
         <h2>Экономика парка Яндекс Еды</h2>
         <p class="lead">«А мне-то что с этого» — без этого блока всё выше повисает в воздухе.</p>
@@ -942,6 +965,7 @@
   <section id="faq">
     <div class="wrap">
       <div class="head-block reveal">
+        <div class="section-icon reveal"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><path d="M19 19C19 15 29 15 29 20C29 24 24 24 24 28"/><circle class="fill" cx="24" cy="34" r="1.8"/></svg></div>
         <span class="tag">Реальные вопросы от парков Яндекс Еды</span>
         <h2>FAQ</h2>
       </div>
