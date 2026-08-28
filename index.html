@@ -318,6 +318,23 @@
   .stage-here{ box-shadow:0 0 0 3px var(--petrol), var(--shadow-soft); }
   .stage-here::after{ content:"Вы здесь"; position:absolute; top:-11px; right:16px; background:var(--petrol); color:#FFF6F5; font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:4px 9px; border-radius:999px; z-index:2; }
 
+  .ticket-clickable{ cursor:pointer; }
+  .ticket-clickable.selected{ outline:3px solid var(--petrol); outline-offset:2px; }
+  .ticket-hint{ margin-top:14px; font-size:12px; font-weight:700; letter-spacing:.02em; }
+  .ticket .ticket-hint{ color:var(--petrol); }
+  .ticket.dark .ticket-hint{ color:var(--yolk); }
+
+  .stage-detail{ display:none; margin-top:24px; background:var(--paper-raised); border:2px solid var(--petrol); border-radius:var(--radius-md); padding:28px 30px; }
+  .stage-detail.open{ display:block; }
+  .stage-detail h4{ font-size:20px; margin:0; }
+  .stage-detail .stage-team{ margin:14px 0 20px; font-size:14.5px; color:var(--clay); }
+  .stage-detail .stage-team b{ color:var(--ink); }
+  .stage-detail .stage-block{ margin-top:20px; }
+  .stage-detail .stage-block h5{ font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; margin:0 0 8px; font-weight:800; }
+  .stage-detail .stage-block.urgent h5{ color:var(--petrol); }
+  .stage-detail .stage-block.soon h5{ color:#8A6A00; }
+  .stage-detail .stage-block.strategic h5{ color:var(--clay); }
+
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
   }
@@ -450,23 +467,32 @@
         <h2>Стадии роста — что делать сейчас, а что пока игнорировать</h2>
         <p class="lead">Весь гайд ниже — не чек-лист «сделай всё сразу». Это разные инструменты для разных стадий.</p>
       </div>
-      <div class="econ-grid reveal d1">
-        <div class="ticket" data-stage-min="0">
+      <div class="econ-grid reveal d1" id="stageCards">
+        <div class="ticket ticket-clickable" data-stage-min="0" data-stage-detail="0">
           <div class="ticket-stub"><span class="ticket-kicker">0–20 курьеров · старт</span></div>
-          <div class="ticket-body"><h3>Один человек тянет всё</h3><p>Один канал (ВК + офлайн-рефералка), ручной прозвон по скриптам из блока «Онбординг». Геймификация и события — рано, курьеров ещё мало для конкуренции между ними. Цель месяца — не потерять никого из первых 20 в первую неделю.</p></div>
+          <div class="ticket-body"><h3>Один человек тянет всё</h3><p>Один канал (ВК + офлайн-рефералка), ручной прозвон по скриптам из блока «Онбординг». Геймификация и события — рано, курьеров ещё мало для конкуренции между ними. Цель месяца — не потерять никого из первых 20 в первую неделю.</p><div class="ticket-hint">Команда, боли, приоритеты →</div></div>
         </div>
-        <div class="ticket dark" data-stage-min="1">
+        <div class="ticket dark ticket-clickable" data-stage-min="1" data-stage-detail="1">
           <div class="ticket-stub"><span class="ticket-kicker">20–50 · разгон</span></div>
-          <div class="ticket-body"><h3>Первый наём и первые команды</h3><p>Добавляете Директ. Прозвон по триггерам уже не тянуть одному вечерами — время нанять диспетчера хотя бы на полставки. Запускаете первые командные цели (блок «Рост SH»).</p></div>
+          <div class="ticket-body"><h3>Первый наём и первые команды</h3><p>Добавляете Директ. Прозвон по триггерам уже не тянуть одному вечерами — время нанять диспетчера хотя бы на полставки. Запускаете первые командные цели (блок «Рост SH»).</p><div class="ticket-hint">Команда, боли, приоритеты →</div></div>
         </div>
-        <div class="ticket" data-stage-min="2">
+        <div class="ticket ticket-clickable" data-stage-min="2" data-stage-detail="2">
           <div class="ticket-stub"><span class="ticket-kicker">50–150 · масштаб</span></div>
-          <div class="ticket-body"><h3>Полная система удержания</h3><p>Авито оправдан по деньгам. Геймификация, сообщество и регулярные события из блока «Удержание» начинают реально работать — курьеров достаточно, чтобы статус и конкуренция что-то значили. Штат — 2–3 человека.</p></div>
+          <div class="ticket-body"><h3>Полная система удержания</h3><p>Авито оправдан по деньгам. Геймификация, сообщество и регулярные события из блока «Удержание» начинают реально работать — курьеров достаточно, чтобы статус и конкуренция что-то значили. Штат — 2–3 человека.</p><div class="ticket-hint">Команда, боли, приоритеты →</div></div>
         </div>
-        <div class="ticket dark" data-stage-min="3">
+        <div class="ticket dark ticket-clickable" data-stage-min="3" data-stage-detail="3">
           <div class="ticket-stub"><span class="ticket-kicker">150+ · топ парк Яндекс Еды</span></div>
-          <div class="ticket-body"><h3>Второй район или город</h3><p>Отдельный человек на рекрутинг постоянно. Разговор с сервисом о персональных тарифах становится реалистичным. Рост дальше — за счёт географии: у каждой зоны свой лидерборд и своя SH-цель, спрос между районами не одинаков, и общий рейтинг на весь парк перестаёт быть честным.</p></div>
+          <div class="ticket-body"><h3>Второй район или город</h3><p>Отдельный человек на рекрутинг постоянно. Разговор с сервисом о персональных тарифах становится реалистичным. Рост дальше — за счёт географии: у каждой зоны свой лидерборд и своя SH-цель, спрос между районами не одинаков, и общий рейтинг на весь парк перестаёт быть честным.</p><div class="ticket-hint">Команда, боли, приоритеты →</div></div>
         </div>
+      </div>
+
+      <div class="stage-detail" id="stageDetail">
+        <h4 id="stageDetailTitle"></h4>
+        <div class="stage-team"><b>Команда:</b> <span id="stageDetailTeam"></span></div>
+        <p id="stageDetailPain" style="font-size:14.5px; color:var(--clay); max-width:70ch;"></p>
+        <div class="stage-block urgent"><h5>Решать сначала</h5><ul class="plist" id="stageDetailUrgent"></ul></div>
+        <div class="stage-block soon"><h5>Дальше</h5><ul class="plist" id="stageDetailSoon"></ul></div>
+        <div class="stage-block strategic"><h5>Стратегически, не сейчас</h5><ul class="plist" id="stageDetailLater"></ul></div>
       </div>
 
     </div>
@@ -1110,30 +1136,70 @@
     if(e.key === 'Escape'){ navGroups.forEach(function(g){ g.classList.remove('open'); }); }
   });
 
-  var stageFilter = document.getElementById('stageFilter');
-  var stageStatus = document.getElementById('stageStatus');
-  var stageStatusText = {
-    all: 'Ничего не выбрано — читайте гайд целиком или отметьте стадию, чтобы скрыть механики, которые пока рано применять.',
-    0: 'Готово — карточка «0–20» помечена «Вы здесь». Ниже по гайду мы скрыли командные цели, геймификацию, наём и другие механики не для вашего масштаба — они появятся сами, когда долистаете до раздела «Экономика», не раньше.',
-    1: 'Готово — карточка «20–50» помечена «Вы здесь». Скрыли только то, что рано (геймификация, автоматизация триггеров, реинвестирование маржи) — командные цели и первый найм уже открыты, это ваш уровень.',
-    2: 'Готово — карточка «50–150» помечена «Вы здесь». Для вашего масштаба открыто всё — дальше по гайду скрывать больше нечего.',
-    3: 'Готово — карточка «150+» помечена «Вы здесь». Для вашего масштаба открыто всё в гайде.'
+  var stageData = {
+    0: {
+      title: '0–20 курьеров · старт',
+      team: 'только вы. Один человек закрывает всё — привлечение, онбординг, прозвон, поддержку.',
+      pain: 'Каждая потеря курьера в первые дни заметна на всей базе. Времени физически не хватает на всё сразу. Данных ещё мало, чтобы на что-то полагаться, кроме прямого контакта.',
+      urgent: ['Отвечать на заявки в течение часа', 'Не пропустить скрипт «Новичок, день 1» ни для одного из первых 20'],
+      soon: ['Довести до стабильности один канал (ВК + офлайн-рефералка), прежде чем добавлять второй', 'Начать считать базовые метрики: конверсию, стоимость привлечения'],
+      later: ['Геймификация, полноценная команда, автоматизация — рано: курьеров и данных пока недостаточно']
+    },
+    1: {
+      title: '20–50 · разгон',
+      team: 'вы + первый наём — диспетчер/оператор поддержки на неполную ставку, снимает с вас рутину триггеров.',
+      pain: 'Разрываетесь между привлечением новых и удержанием уже подключённых одновременно — оба процесса начинают проседать. Первая передача звонков другому человеку — риск потерять качество, если не передать скрипты явно.',
+      urgent: ['Нанять и обучить диспетчера по готовым скриптам и триггерам из этого гайда — не изобретать новые, передать то, что уже работает'],
+      soon: ['Подключить второй канал (Директ)', 'Запустить первые командные цели (блок «Рост SH»)'],
+      later: ['Полноценная геймификация и сообщество заработают позже, когда база больше']
+    },
+    2: {
+      title: '50–150 · масштаб',
+      team: 'вы как операционный руководитель + штат 2–3 человека — обычно диспетчер(ы) и отдельно кто-то на привлечение.',
+      pain: 'Ручное управление больше не масштабируется — нужна система, а не разовые звонки. Конкуренция с соседними парками становится реальной причиной оттока. Механики удержания усложняются — вместе с ними растёт риск накрутки.',
+      urgent: ['Включить полную систему удержания — геймификация, сообщество, регулярные события. Без неё отток съедает весь рост'],
+      soon: ['Раз в квартал сверять условия с конкурирующими парками', 'Следить за аномалиями в метриках на предмет накрутки'],
+      later: ['Присматриваться ко второму району — но не раньше, чем текущая система стабильна']
+    },
+    3: {
+      title: '150+ · топ парк Яндекс Еды',
+      team: 'операционный директор + выделенный рекрутер постоянно (не на полставки) + диспетчеры по зонам или сменам.',
+      pain: 'Одна зона больше не описывает весь парк — спрос и динамика в разных районах разные, общий рейтинг на всех перестаёт быть честным. Реинвестирование прибыли требует дисциплины, не интуиции.',
+      urgent: ['Разделить цели и лидерборды по зонам — не сравнивать несравнимое'],
+      soon: ['Обсудить с сервисом персональные тарифы', 'Нанять выделенного рекрутера, если ещё не сделали'],
+      later: ['Экспансия во второй район или город, системное реинвестирование маржи по приоритету']
+    }
   };
-  if(stageFilter){
-    var stageBtns = stageFilter.querySelectorAll('[data-stage]');
-    var stagedEls = document.querySelectorAll('[data-stage-min]');
-    stageFilter.addEventListener('click', function(e){
-      var btn = e.target.closest('[data-stage]');
-      if(!btn) return;
-      stageBtns.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      var val = btn.dataset.stage;
-      stagedEls.forEach(function(el){
-        var min = parseInt(el.dataset.stageMin, 10);
-        el.classList.toggle('stage-dim', val !== 'all' && min > parseInt(val, 10));
-        el.classList.toggle('stage-here', val !== 'all' && min === parseInt(val, 10) && el.classList.contains('ticket'));
-      });
-      if(stageStatus) stageStatus.textContent = stageStatusText[val] || stageStatusText.all;
+
+  var stageCards = document.getElementById('stageCards');
+  var stageDetail = document.getElementById('stageDetail');
+  if(stageCards && stageDetail){
+    var stageDetailTitle = document.getElementById('stageDetailTitle');
+    var stageDetailTeam = document.getElementById('stageDetailTeam');
+    var stageDetailPain = document.getElementById('stageDetailPain');
+    var stageDetailUrgent = document.getElementById('stageDetailUrgent');
+    var stageDetailSoon = document.getElementById('stageDetailSoon');
+    var stageDetailLater = document.getElementById('stageDetailLater');
+    function fillList(el, items){
+      el.innerHTML = '';
+      items.forEach(function(t){ var li = document.createElement('li'); li.textContent = t; el.appendChild(li); });
+    }
+    stageCards.addEventListener('click', function(e){
+      var card = e.target.closest('[data-stage-detail]');
+      if(!card) return;
+      var key = card.dataset.stageDetail;
+      var d = stageData[key];
+      if(!d) return;
+      stageCards.querySelectorAll('.ticket-clickable').forEach(function(c){ c.classList.remove('selected'); });
+      card.classList.add('selected');
+      stageDetailTitle.textContent = d.title;
+      stageDetailTeam.textContent = d.team;
+      stageDetailPain.textContent = d.pain;
+      fillList(stageDetailUrgent, d.urgent);
+      fillList(stageDetailSoon, d.soon);
+      fillList(stageDetailLater, d.later);
+      stageDetail.classList.add('open');
+      stageDetail.scrollIntoView({ behavior:'smooth', block:'nearest' });
     });
   }
 
