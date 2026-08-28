@@ -477,6 +477,7 @@
         <button class="tab-btn" data-stage="2">50–150</button>
         <button class="tab-btn" data-stage="3">150+</button>
       </div>
+      <p id="stageStatus" class="reveal d2" style="margin-top:14px; font-size:13.5px; color:var(--clay);">Ничего не выбрано — читайте гайд целиком или отметьте стадию, чтобы скрыть механики, которые пока рано применять.</p>
     </div>
   </section>
 
@@ -1122,6 +1123,14 @@
   });
 
   var stageFilter = document.getElementById('stageFilter');
+  var stageStatus = document.getElementById('stageStatus');
+  var stageStatusText = {
+    all: 'Ничего не выбрано — читайте гайд целиком или отметьте стадию, чтобы скрыть механики, которые пока рано применять.',
+    0: 'Готово — карточка «0–20» помечена «Вы здесь». Ниже по гайду мы скрыли командные цели, геймификацию, наём и другие механики не для вашего масштаба — они появятся сами, когда долистаете до раздела «Экономика», не раньше.',
+    1: 'Готово — карточка «20–50» помечена «Вы здесь». Скрыли только то, что рано (геймификация, автоматизация триггеров, реинвестирование маржи) — командные цели и первый найм уже открыты, это ваш уровень.',
+    2: 'Готово — карточка «50–150» помечена «Вы здесь». Для вашего масштаба открыто всё — дальше по гайду скрывать больше нечего.',
+    3: 'Готово — карточка «150+» помечена «Вы здесь». Для вашего масштаба открыто всё в гайде.'
+  };
   if(stageFilter){
     var stageBtns = stageFilter.querySelectorAll('[data-stage]');
     var stagedEls = document.querySelectorAll('[data-stage-min]');
@@ -1136,6 +1145,7 @@
         el.classList.toggle('stage-dim', val !== 'all' && min > parseInt(val, 10));
         el.classList.toggle('stage-here', val !== 'all' && min === parseInt(val, 10) && el.classList.contains('ticket'));
       });
+      if(stageStatus) stageStatus.textContent = stageStatusText[val] || stageStatusText.all;
     });
   }
 
