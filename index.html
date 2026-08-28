@@ -153,6 +153,9 @@
   .formula{ margin-top:16px; background:var(--paper-raised); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px 24px; }
   .formula code{ display:block; font-family:inherit; font-weight:700; font-size:15px; line-height:1.9; color:var(--ink); }
   .formula p{ margin-top:12px; font-size:13.5px; color:var(--clay); }
+  .formula.key{ background:var(--yolk); border-color:var(--yolk-deep); box-shadow:var(--shadow-soft); }
+  .formula.key code{ color:var(--on-block-pop); font-size:17px; }
+  .formula.key p{ color:var(--on-block-pop-soft); }
 
   .doc-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:18px; }
   @media(max-width:700px){ .doc-grid{grid-template-columns:1fr;} }
@@ -423,9 +426,9 @@
       </div>
       <p class="reveal d3" style="margin-top:20px; font-size:14px; color:var(--clay); max-width:68ch;">Курьер не «уходит из парка ради Еды» — он просто добавляет доход, не теряя привычную работу и человека, к которому можно обратиться. Чем сильнее вы в этих шести ролях, тем выше SH, ниже отток и больше зарабатывают все трое: курьер, вы, сервис.</p>
 
-      <div class="formula reveal d3">
+      <div class="formula key reveal d3">
         <code>SH парка = число активных курьеров × среднее SH на одного курьера</code>
-        <p><b style="color:var(--ink);">SH</b> (service hours) — суммарные часы курьеров на линии, главный показатель сервиса. <b style="color:var(--ink);">Активный курьер</b> — тот, кто выходил на линию хотя бы раз за последние 7 дней; это определение используется во всём гайде ниже. Привлечение растит первый множитель, удержание не даёт ему падать, рост SH на курьера растит второй. Больше курьеров без роста среднего SH на каждого — рост числом, не тот рост, который считает сервис.</p>
+        <p><b style="color:var(--on-block-pop);">SH</b> (service hours) — суммарные часы курьеров на линии, главный показатель сервиса. <b style="color:var(--on-block-pop);">Активный курьер</b> — тот, кто выходил на линию хотя бы раз за последние 7 дней; это определение используется во всём гайде ниже. Привлечение растит первый множитель, удержание не даёт ему падать, рост SH на курьера растит второй. Больше курьеров без роста среднего SH на каждого — рост числом, не тот рост, который считает сервис.</p>
       </div>
 
       <div id="tools">
